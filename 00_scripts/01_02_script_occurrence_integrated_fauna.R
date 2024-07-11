@@ -1,8 +1,7 @@
 #' ---
-#' title: Plataforma Seleção
-#' author: Paula Montagnana
+#' title: integrate occcurence data
+#' author: 
 #' date: 06 02 2024
-#' aim: Join tabelas; summarize dados
 #' ---
 
 # prepare r ---------------------------------------------------------------
@@ -22,10 +21,6 @@ li
 
 tm_shape(li) +
     tm_polygons()
-
-## species lists ----
-list_fauna <- readr::read_csv("02_data/00_species_list/fauna_mma_2024_fitered.csv")
-list_fauna
 
 ## specieslink and spocc ----
 occ_specieslink_spocc_fauna <- readr::read_csv("02_data/01_occurrences/02_integrated/occ_raw_splink_spocc_fauna.csv") %>% 
