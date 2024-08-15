@@ -120,4 +120,10 @@ tm_shape(li) +
     tm_shape(bats_literature_sf) +
     tm_dots()
 
+# export ------------------------------------------------------------------
+
+# export
+readr::write_csv(bats_literature, "01_data/00_occurrences/bats_literature.csv")
+sf::st_write(bats_literature_sf, "01_data/00_occurrences/bats_literature.gpkg")
+
 # end ---------------------------------------------------------------------
