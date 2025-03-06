@@ -4,7 +4,5 @@
 .Ruserdata
 
 /01_data/01_variables/
-/01_data/03_rabies/00_raw/dbc
-/01_data/04_vector/
-/02_models/
-/03_analysis/
+/01_data/03_vector/
+/02_results/

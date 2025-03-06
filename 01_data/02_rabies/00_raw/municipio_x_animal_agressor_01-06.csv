@@ -1,0 +1,59 @@
+RAIVA - Casos confirmados notificados no Sistema de Informação de Agravos de Notificação - Brasil
+Casos confirmados por Município de notificação e animal agressor
+Período:2001-2006
+"Município de notificação";"Ign/Branco";"Canina";"Felina";"Quiróptera (morcego)";"Primata (macaco)";"Outra";"Total"
+"110015 OURO PRETO DO OESTE";-;1;-;-;-;-;1
+"110018 PIMENTA BUENO";-;2;-;-;-;-;2
+"110028 ROLIM DE MOURA";-;1;-;-;-;-;1
+"120040 RIO BRANCO";1;-;-;-;-;-;1
+"150090 AUGUSTO CORREA";-;-;-;5;-;-;5
+"150140 BELEM";-;-;-;10;-;-;10
+"150293 DOM ELISEU";-;1;-;-;-;-;1
+"150420 MARABA";-;1;-;-;-;-;1
+"150580 PORTEL";2;-;-;13;-;-;15
+"150750 SAO JOAO DO ARAGUAIA";-;1;-;-;-;-;1
+"150830 VISEU";-;-;-;4;-;-;4
+"170210 ARAGUAINA";-;-;-;-;-;1;1
+"210480 GRAJAU";-;1;-;-;-;-;1
+"210542 ITINGA DO MARANHAO";-;1;-;-;-;-;1
+"210596 LAGOA GRANDE DO MARANHAO";-;1;-;-;-;-;1
+"210850 PINDARE-MIRIM";-;1;-;-;-;-;1
+"211130 SAO LUIS";-;6;2;13;-;-;21
+"211240 TURIACU";-;-;-;10;-;-;10
+"220070 ANISIO DE ABREU";1;-;-;-;-;-;1
+"220192 BONFIM DO PIAUI";-;-;-;-;-;1;1
+"221100 TERESINA";1;-;-;-;-;-;1
+"230440 FORTALEZA";-;9;-;-;1;-;10
+"261160 RECIFE";-;2;-;-;-;-;2
+"270430 MACEIO";1;3;-;-;-;-;4
+"270510 MATRIZ DE CAMARAGIBE";-;-;-;1;-;-;1
+"280290 ITABAIANA";-;1;-;-;-;-;1
+"280480 NOSSA SENHORA DO SOCORRO";-;1;-;-;-;-;1
+"291005 DIAS D'AVILA";-;1;-;-;-;-;1
+"291710 ITORORO";-;-;-;1;-;-;1
+"291840 JUAZEIRO";-;1;-;-;-;-;1
+"292100 MATA DE SAO JOAO";-;1;-;-;-;-;1
+"292740 SALVADOR";-;2;-;-;-;-;2
+"310150 ALEM PARAIBA";-;-;-;1;-;-;1
+"310620 BELO HORIZONTE";-;-;-;-;-;2;2
+"312780 GRAO MOGOL";-;-;-;1;-;-;1
+"315600 RIO VERMELHO";-;1;-;-;-;-;1
+"320316 LARANJA DA TERRA";-;-;-;1;-;-;1
+"351440 DRACENA";-;-;1;-;-;-;1
+"354140 PRESIDENTE PRUDENTE";1;-;-;-;-;-;1
+"355030 SAO PAULO";1;-;-;1;-;-;2
+"520870 GOIANIA";-;1;-;-;-;-;1
+"Total";8;40;3;61;1;4;117
+ Fonte: Ministério da Saúde/SVS - Sistema de Informação de Agravos de Notificação - Sinan 
+ Notas:
+ 
+ Excluídos casos não residentes no Brasil
+ Períodos Disponíveis ou período - Correspondem aos anos de notificação dos casos.
+ Para tabular dados em série histórica selecione na linha a variável de interesse, na Coluna Ano dos 1ºs sintomas;
+    em Períodos Disponíveis assinale o ano inicial da série e todos os posteriores até o ano atual (p/ incluir casos notificados
+    com atraso) e em Seleções Disponíveis assinale os anos dos 1ºs sintomas (ex: série histórica de nº de casos, 2001 a 2005:
+    selecione na linha UF de residência, na Coluna Ano de 1ºs sintomas, em Períodos disponíveis-2001 até o ano atual e
+    em Seleções assinale Ano de 1ºs sintomas de 2001 a 2005).
+ Casos confirmados não incluídos no Sinan: 2 casos em 2002; 1 caso em 2004; 3 casos em 2005;1 caso em 2006.
+ Para cálculo da incidência utilize locais de residência.
+ 

@@ -1,16 +1,13 @@
 #' ----
 #' aim: rabies data
 #' author: mauricio vancine
-#' date: 22/01/2025
+#' date: 2025-03-06
 #' ----
 
 # prepare r ---------------------------------------------------------------
 
 # packages
 library(tidyverse)
-library(readxl)
-library(tidyxl)
-library(read.dbc)
 library(janitor)
 
 # download pdf tables ----------------------------------------------------
@@ -19,165 +16,169 @@ library(janitor)
 for(i in 1:16){
     
     download.file(url = paste0("https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/r/raiva/arquivos/tabela-", i, ".pdf"),
-                  destfile = paste0("01_data/03_rabies/00_raw/tabela_", i, ".pdf"), mode = "wb")
+                  destfile = paste0("01_data/02_rabies/00_raw/tabela_", i, ".pdf"), mode = "wb")
 }
 
-# read tables
-table1 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_1.xlsx", sheet = 2) %>% 
+# rabies_animals ----------------------------------------------------------
+
+uf_animais_2015 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2015.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2015)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2015)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2015 <- uf_animais_2015 %>% 
     janitor::clean_names() %>% 
     dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(regiao_uf = str_replace_all(regiao_uf, "\\d+", ""))
-table1
+    dplyr::mutate(year = 2015) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2015
 
-table2 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_2.xlsx", sheet = 2) %>% 
-    janitor::clean_names()
-table2
-
-table3_2 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_3.xlsx", sheet = 2) %>% 
-    janitor::clean_names()
-table3_4 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_3.xlsx", sheet = 4, col_names = FALSE) 
-colnames(table3_4) <- colnames(table3_2)
-table3 <- rbind(table3_2, table3_4)    
-table3
-
-table4 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_4.xlsx", sheet = 2) %>% 
+uf_animais_2016 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2016.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2016)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2016)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2016 <- uf_animais_2016 %>% 
     janitor::clean_names() %>% 
     dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(regiao_uf = str_replace_all(regiao_uf, "\\d+", ""))
-table4
+    dplyr::mutate(year = 2016) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2016
 
-table5 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_5.xlsx") %>% 
-    dplyr::slice(-c(1:2))
-table5[1, 2] <- "municipality"
-table5 <- table5 %>% 
-    dplyr::slice(-1) %>% 
-    setNames(table5[1, ]) %>% 
+uf_animais_2017 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2017.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2017)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2017)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2017 <- uf_animais_2017 %>% 
     janitor::clean_names() %>% 
-    dplyr::rename(regiao_uf = 1) %>% 
-    dplyr::slice(-1) %>% 
-    dplyr::select(-starts_with("na")) %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"),
-                  municipality != "-") %>% 
-    tidyr::fill(regiao_uf, .direction = "down") %>% 
-    dplyr::mutate(across(everything(), ~ str_replace_all(., "-", "0"))) %>% 
-    dplyr::mutate(across(starts_with("x"), ~ replace_na(., "0"))) %>% 
-    dplyr::mutate(across(starts_with("x"), ~ as.numeric(.)))
-table5
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2017) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2017
 
-table6 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_6.xlsx", sheet = 3) %>% 
+uf_animais_2018 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2018.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2018)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2018)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2018 <- uf_animais_2018 %>% 
     janitor::clean_names() %>% 
-    dplyr::rename(regiao_uf = 1) %>% 
-    dplyr::slice(-1)
-colnames(table6)[2] <- "municipality"
-table6 <- table6 %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"),
-                  municipality != "-") %>% 
-    dplyr::select(1:2, paste0("x", 2015:2024)) %>% 
-    tidyr::fill(regiao_uf, .direction = "down") %>% 
-    dplyr::mutate(across(everything(), ~ str_replace_all(., "-", "0"))) %>% 
-    dplyr::mutate(across(starts_with("x"), ~ replace_na(., "0"))) %>% 
-    dplyr::mutate(across(starts_with("x"), ~ as.numeric(.)))
-table6
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2018) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2018
 
-table7 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_7.xlsx") %>%
+uf_animais_2019 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2019.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2019)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2019)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2019 <- uf_animais_2019 %>% 
+    janitor::clean_names() %>% 
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2019) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2019
+
+uf_animais_2020 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2020.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2020)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2020)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2020 <- uf_animais_2020 %>% 
+    janitor::clean_names() %>% 
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2020) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2020
+
+uf_animais_2021 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2021.xlsx", sheet = 2) %>%
+    dplyr::slice(-c(1, 34))
+colnames(uf_animais_2021)[7] <- "Quiroptéros_Hematófagos"
+colnames(uf_animais_2021)[8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2021 <- uf_animais_2021 %>% 
+    janitor::clean_names() %>% 
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2021) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2021
+
+uf_animais_2022 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2022.xlsx") %>%
     dplyr::slice(-c(1, 36:37)) %>% 
     janitor::clean_names()
-table7[1, 7] <- "Quiroptéros_Hematófagos"
-table7[1, 8] <- "Quiroptéros_Não Hematófagos"
-table7 <- table7 %>% 
-    setNames(table7[1, ]) %>% 
+uf_animais_2022[1, 7] <- "Quiroptéros_Hematófagos"
+uf_animais_2022[1, 8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2022 <- uf_animais_2022 %>% 
+    setNames(uf_animais_2022[1, ]) %>% 
     dplyr::slice(-c(1:2)) %>% 
     janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table7
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2022) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric))
+uf_animais_2022
 
-table8 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_8.xlsx") %>%
+uf_animais_2023 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2023.xlsx") %>%
     dplyr::slice(-c(1, 36:37)) %>% 
     janitor::clean_names()
-table8[1, 7] <- "Quiroptéros_Hematófagos"
-table8[1, 8] <- "Quiroptéros_Não Hematófagos"
-table8 <- table8 %>% 
-    setNames(table8[1, ]) %>% 
+uf_animais_2023[1, 7] <- "Quiroptéros_Hematófagos"
+uf_animais_2023[1, 8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2023 <- uf_animais_2023 %>% 
+    setNames(uf_animais_2023[1, ]) %>% 
     dplyr::slice(-c(1:2)) %>% 
     janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table8
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2023) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric)) %>% 
+    dplyr::rename(bovina = bovino,
+                  equina = equino,
+                  suina_caprina_ovina_e_outros_herbivoros = suino_caprino_ovino_e_outros_herb)
+uf_animais_2023
 
-table9 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_9.xlsx") %>%
+uf_animais_2024 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2024.xlsx") %>%
     dplyr::slice(-c(1, 36:37)) %>% 
     janitor::clean_names()
-table9[1, 7] <- "Quiroptéros_Hematófagos"
-table9[1, 8] <- "Quiroptéros_Não Hematófagos"
-table9 <- table9 %>% 
-    setNames(table9[1, ]) %>% 
+uf_animais_2024[1, 7] <- "Quiroptéros_Hematófagos"
+uf_animais_2024[1, 8] <- "Quiroptéros_Não Hematófagos"
+uf_animais_2024 <- uf_animais_2024 %>% 
+    setNames(uf_animais_2024[1, ]) %>% 
     dplyr::slice(-c(1:2)) %>% 
     janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table9
+    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
+    dplyr::mutate(year = 2024) %>% 
+    dplyr::mutate(across(-regiao_uf, as.numeric)) %>% 
+    dplyr::rename(bovina = bovino,
+                  equina = equino,
+                  suina_caprina_ovina_e_outros_herbivoros = suino_caprino_ovino_e_outros_herb)
+uf_animais_2024
 
-table10 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_10.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table10)[7] <- "Quiroptéros_Hematófagos"
-colnames(table10)[8] <- "Quiroptéros_Não Hematófagos"
-table10 <- table10 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table10
+uf_animais <- dplyr::bind_rows(
+    uf_animais_2015, uf_animais_2016, uf_animais_2017, uf_animais_2018, 
+    uf_animais_2019, uf_animais_2020, uf_animais_2021, uf_animais_2022,
+    uf_animais_2023, uf_animais_2024) %>% 
+    dplyr::select(-year) %>% 
+    dplyr::group_by(regiao_uf) %>% 
+    dplyr::summarise(across(
+        .cols = where(is.numeric),
+        .fns = list(sum = sum),
+        .names = "{.col}"))
+uf_animais
 
-table11 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_11.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table11)[7] <- "Quiroptéros_Hematófagos"
-colnames(table11)[8] <- "Quiroptéros_Não Hematófagos"
-table11 <- table11 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table11
+readr::write_csv(uf_animais, "01_data/02_rabies/02_summarized/uf_animais.csv")
 
-table12 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_12.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table12)[7] <- "Quiroptéros_Hematófagos"
-colnames(table12)[8] <- "Quiroptéros_Não Hematófagos"
-table12 <- table12 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table12
+# rabies_humans -----------------------------------------------------------
 
-table13 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_13.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table13)[7] <- "Quiroptéros_Hematófagos"
-colnames(table13)[8] <- "Quiroptéros_Não Hematófagos"
-table13 <- table13 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table13
+rabies_humans_atend <- NULL
+rabies_humans_atend_files <- dir("01_data/02_rabies/01_cleaned/rabies_humans/atend_antir", full.names = TRUE)
+for(i in 1:length(rabies_humans_atend_files)){
+    
+    if(i == 1){
+        rabies_humans_atend_i <- readr::read_tsv(rabies_humans_atend_files[i]) %>% 
+            janitor::clean_names() %>% 
+            dplyr::mutate(cs_escol_n = as.numeric(cs_escol_n),
+                          dt_notific = as.character(dt_notific))
+    }else{
+        rabies_humans_atend_i <- readr::read_csv(rabies_humans_atend_files[i]) %>% 
+            janitor::clean_names() %>% 
+            dplyr::mutate(cs_escol_n = as.numeric(cs_escol_n),
+                          dt_notific = as.character(dt_notific))
+    }
+    rabies_humans_atend <- dplyr::bind_rows(rabies_humans_atend, rabies_humans_atend_i)
+}
+rabies_humans_atend
 
-table14 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_14.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table14)[7] <- "Quiroptéros_Hematófagos"
-colnames(table14)[8] <- "Quiroptéros_Não Hematófagos"
-table14 <- table14 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table14
-
-table15 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_15.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table15)[7] <- "Quiroptéros_Hematófagos"
-colnames(table15)[8] <- "Quiroptéros_Não Hematófagos"
-table15 <- table15 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table15
-
-table16 <- readxl::read_excel(path = "01_data/03_rabies/00_raw/tabela_16.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(table16)[7] <- "Quiroptéros_Hematófagos"
-colnames(table16)[8] <- "Quiroptéros_Não Hematófagos"
-table16 <- table16 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste"))
-table16
-
-# dbc ---------------------------------------------------------------------
-
-read.dbc::read.dbc("01_data/03_rabies/00_raw/dbc/atendimento_antirrabico/ANTRBR06.dbc")
+# end ---------------------------------------------------------------------

@@ -1,5 +1,5 @@
 #' ---
-#' title: variavies - download
+#' title: bats & blood - download
 #' author: mauricio vancine
 #' date: 2024-03-23
 #' ---
@@ -17,7 +17,7 @@ options(timeout = 3e5)
 ## regional ----
 
 # climate
-geodata::worldclim_global(var = "bio", res = "10", path = "01_data/01_variables/")
+geodata::worldclim_global(var = "bio", res = "0.5", path = "01_data/01_variables/01_climate/00_raw/")
 
 # topography
 # download.file(url = paste0("https://data.earthenv.org/topography/elevation_1KMmd_GMTEDmd.tif"), 
