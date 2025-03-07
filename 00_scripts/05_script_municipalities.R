@@ -20,7 +20,7 @@ mun
 plot(mun$geometry)
 
 # rabies_animals
-rabies_animals <- readr::read_csv("")
+rabies_animals <- readr::read_csv("01_data/02_rabies/02_summarized/rabie_animals.csv")
 rabies_animals
 
 # rabies_humans
