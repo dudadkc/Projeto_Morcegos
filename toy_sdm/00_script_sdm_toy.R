@@ -35,7 +35,7 @@ dir(system.file("java", package = "dismo"))
 # import data -------------------------------------------------------------
 
 # occ
-occ <- readr::read_csv("01_data/00_occurrences/01_clean/01_occ_cleaned.csv") %>% 
+occ <- readr::read_csv("toy_sdm/01_occ_cleaned.csv") %>% 
     dplyr::mutate(species = "Desmodus rotundus") %>% 
     dplyr::slice_sample(n = 50)
 occ
@@ -48,7 +48,7 @@ occ_sf <- occ %>%
 occ_sf
 
 # covar
-covar <- terra::rast("test/covar.tif")
+covar <- terra::rast("toy_sdm/02_covar.tif")
 covar
 
 # map
@@ -87,7 +87,7 @@ occ_z <- cbind(occ_i, terra::extract(covar_sel, occ_i, ID = FALSE))
 bg_z <- cbind(bg, terra::extract(covar_sel, bg))
 
 plot(bg_z[, 1:2], col = "gray", pch = 20)
-points(occs_z[, 1:2], pch = 20, col = "red")
+points(occ_z[, 1:2], pch = 20, col = "red")
 
 ### fit ----
 eval_fit <- ENMeval::ENMevaluate(
@@ -97,7 +97,7 @@ eval_fit <- ENMeval::ENMevaluate(
     algorithm = "maxent.jar", 
     partitions = "block",
     parallel = TRUE, 
-    numCores = 2)
+    numCores = 6) # change number of cores
 eval_fit
 
 ### occs, bg and partitions ----
@@ -175,29 +175,18 @@ thr_tss <- rbind(thr, tss)
 thr_tss <- cbind(data.frame(metrics = c("thresholds", "tss")), thr_tss)
 
 ## export ----
-path_sp <- paste0("02_results/03_01_sdms_v05")
-
-dir.create(path = path_sp)
-
-writexl::write_xlsx(covar_vif@results, paste0(path_sp, "/02_vif.xlsx"))
+path_sp <- "toy_sdm"
 
 writexl::write_xlsx(eval_occs, paste0(path_sp, "/01_occs.xlsx"))
 writexl::write_xlsx(eval_bg, paste0(path_sp, "/01_bg.xlsx"))
-# ggsave(paste0(path_sp, "/01_map_occs_block.png"), plot_spat_block_part_occ, wi = 25, he = 20, un = "cm", dpi = 300)
-# ggsave(paste0(path_sp, "/01_map_bg_block.png"), plot_spat_block_part_bg, wi = 25, he = 20, un = "cm", dpi = 300)
-# ggsave(paste0(path_sp, "/01_map_occs_envsim.png"), plot_spat_block_part_envsim_occ, wi = 25, he = 20, un = "cm", dpi = 300)
-# ggsave(paste0(path_sp, "/01_map_bg_envsim.png"), plot_spat_block_part_envsim_bg, wi = 25, he = 20, un = "cm", dpi = 300)
+
+writexl::write_xlsx(covar_vif@results, paste0(path_sp, "/02_vif.xlsx"))
+writexl::write_xlsx(eval_resul_varimp, paste0(path_sp, "/02_eval_resul_varimp.xlsx"))
+writexl::write_xlsx(eval_resul_response, paste0(path_sp, "/02_eval_resul_response.xlsx"))
 
 writexl::write_xlsx(eval_resul, paste0(path_sp, "/03_01_eval_results.xlsx"))
 writexl::write_xlsx(eval_resul_partitions, paste0(path_sp, "/03_01_eval_resul_partitions.xlsx"))
 writexl::write_xlsx(eval_resul_aic, paste0(path_sp, "/03_01_eval_resul_aic.xlsx"))
-
-# ggsave(paste0(path_sp, "/03_01_delta_aicc_tune_args.png"), plot_delta_aicc_tune_args, wi = 30, he = 20, un = "cm", dpi = 300)
-# ggsave(paste0(path_sp, "/03_01_ormtp_tune_args.png"), plot_ormtp_tune_args, wi = 30, he = 20, un = "cm", dpi = 300)
-# ggsave(paste0(path_sp, "/03_01_auc_tune_args.png"), plot_auc_tune_args, wi = 30, he = 20, un = "cm", dpi = 300)
-
-# writexl::write_xlsx(mod_null_results, paste0(path_sp, "/03_02_mod_null_results.xlsx"))
-# ggsave(paste0(path_sp, "/03_02_mod_null_hist.png"), plot_mod_null_hist, wi = 30, he = 20, un = "cm", dpi = 300)
 
 ggsave(paste0(path_sp, "/03_03_covarimp.png"), plot_covar_imp, wi = 30, he = 20, un = "cm", dpi = 300)
 ggsave(paste0(path_sp, "/03_03_covarrep.png"), plot_covar_res, wi = 30, he = 20, un = "cm", dpi = 300)
