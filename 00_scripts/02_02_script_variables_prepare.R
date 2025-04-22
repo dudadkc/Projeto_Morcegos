@@ -9,6 +9,8 @@
 # packages
 library(tidyverse)
 library(terra)
+library(lsmetrics)
+library(rgrass)
 
 # options
 options(timeout = 3e5)
@@ -33,7 +35,7 @@ plot(climate[[1]])
 
 ## topography ----
 topography_list <- dir(path = "01_data/01_variables/02_topography/00_raw/", 
-                  pattern = ".tif", full.names = TRUE)
+                       pattern = ".tif", full.names = TRUE)
 topography_list
 
 topography <- terra::rast(topography_list)
@@ -49,6 +51,10 @@ plot(hydrology)
 caves <- terra::rast("01_data/01_variables/04_caves/00_raw/karst_resample_1km_wgs84.tif")
 caves
 plot(caves)
+
+## lulc ----
+lulc <- terra::rast("01_data/01_variables/05_edge/history_2020.tif")
+lulc
 
 ## adjust ----
 climate_neo <- climate %>% 
@@ -75,8 +81,21 @@ hydrology_neo[!is.na(hydrology_neo)] <- 1
 hydrology_neo
 plot(hydrology_neo)
 
-## distance ----
-rgrass::initGRASS(gisBase = system("grass --config path", inter = TRUE),
+lulc_neo <- edge %>%
+    terra::crop(terra::project(neo, crs(lulc))) %>%
+    terra::mask(terra::project(neo, crs(lulc))) %>%
+    project(crs(neo), method = "near")
+forest_neo <- terra::ifel(lulc_neo == 2, 1, 0)
+forest_neo
+plot(forest_neo)
+
+terra::writeRaster(forest_neo, "01_data/01_variables/05_lulc/forest_neo.tif")
+
+## hydrology distance ----
+path_grass <- system("grass --config path", inter = TRUE) # windows users need to find the grass gis path installation, e.g. "C:/Program Files/GRASS GIS 8.3"
+path_grass
+
+rgrass::initGRASS(gisBase = path_grass,
                   SG = hydrology_neo,
                   gisDbase = "01_data/01_variables/grassdb",
                   location = "newLocation",
@@ -92,6 +111,35 @@ rgrass::execGRASS(cmd = "r.mapcalc", flags = "overwrite", expression = "hydrolog
 rgrass::execGRASS(cmd = "r.mask", vector = "neo")
 
 hydrology_neo <- rgrass::read_RAST("hydrology_neo_distance_int")
+
+## edge distance ----
+path_grass <- system("grass --config path", inter = TRUE) # windows users need to find the grass gis path installation, e.g. "C:/Program Files/GRASS GIS 8.3"
+path_grass
+
+rgrass::initGRASS(gisBase = path_grass,
+                  SG = hydrology_neo,
+                  gisDbase = "01_data/01_variables/grassdb",
+                  location = "newLocation",
+                  mapset = "PERMANENT",
+                  override = TRUE)
+
+rgrass::execGRASS(cmd = "v.import", flags = "overwrite", input = "01_data/01_variables/00_limits/neotropic_dissolved_fill_holes.shp", output = "neo")
+rgrass::execGRASS(cmd = "r.import", flags = "overwrite", input = "01_data/01_variables/05_lulc/forest_neo.tif", output = "forest_neo")
+rgrass::execGRASS(cmd = "r.mapcalc", flags = "overwrite", expression = "forest_neo=forest_neo")
+
+lsmetrics::lsm_distance(input = "forest_neo", distance_type = "both", zero_as_na = FALSE, distance_metric = "geodesic")
+
+rgrass::execGRASS(cmd = "r.mapcalc", flags = "overwrite", expression = "forest_neo_distance_inside_negative=forest_neo_distance_inside*-1")
+rgrass::execGRASS(cmd = "r.mapcalc", flags = "overwrite", expression = "forest_neo_distance=forest_neo_distance_outside+forest_neo_distance_inside_negative")
+
+rgrass::execGRASS(cmd = "g.region", vector = "neo")
+
+forest_neo_distance_inside <- rgrass::read_RAST("forest_neo_distance_inside")
+forest_neo_distance_outside <- rgrass::read_RAST("forest_neo_distance_outside")
+
+forest_neo_distance <- rgrass::read_RAST("forest_neo_distance")
+
+terra::writeRaster(forest_neo_distance, "01_data/01_variables/05_lulc/forest_neo_distance.tif")
 
 ## names ----
 names(climate_neo) <- c(paste0("bio0", 1:9), paste0("bio", 10:19))
