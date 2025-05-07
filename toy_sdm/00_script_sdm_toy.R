@@ -20,6 +20,7 @@ library(dismo)
 library(ecospat)
 library(rJava)
 library(ENMeval)
+library(usdm)
 library(tmap)
 
 # tmap options
@@ -166,13 +167,23 @@ plot(eval_fit_aic_predict_thr_equal_sens_spec)
 plot(eval_fit_aic_predict_thr_spec_sens)
 plot(eval_fit_aic_predict_thr_sensitivity)
 
-### tss ---
+### auc, tss and boyce ---
 thr_id <- NULL
 for(j in names(threshold(ev))) thr_id <- c(thr_id, which(ev@t == dismo::threshold(ev, j)))
 tss <- ev@TPR[thr_id] + ev@TNR[thr_id] - 1
 
 thr_tss <- rbind(thr, tss)
 thr_tss <- cbind(data.frame(metrics = c("thresholds", "tss")), thr_tss)
+thr_tss
+
+auc <- ev@auc
+auc
+
+boyce <- ecospat::ecospat.boyce(fit = eval_fit_aic_predict, obs = eval_fit@occs[, 1:2])$cor
+boyce
+
+### evaluation ----
+avaliar_dismo(ev)
 
 ## export ----
 path_sp <- "toy_sdm"

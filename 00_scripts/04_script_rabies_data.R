@@ -1,270 +1,212 @@
 #' ----
 #' aim: rabies data
 #' author: mauricio vancine
-#' date: 2025-03-06
+#' date: 05/05/2025
 #' ----
 
 # prepare r ---------------------------------------------------------------
 
 # packages
 library(tidyverse)
-library(janitor)
 
-# download pdf tables ----------------------------------------------------
+# import data -------------------------------------------------------------
 
-# download tables
-# for(i in 1:16){
-#     
-#     download.file(url = paste0("https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/r/raiva/arquivos/tabela-", i, ".pdf"),
-#                   destfile = paste0("01_data/02_rabies/00_raw/tabela_", i, ".pdf"), mode = "wb")
-# }
+## data at the municipality level ----
 
-# rabies_animals ----------------------------------------------------------
+### rabies domestic ----
+rabies_domestic_canine <- readxl::read_excel("01_data/02_rabies/03_final/cases_cats_dogs.xlsx", sheet = 1)
+rabies_domestic_canine
 
-uf_animals_2015 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2015.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2015)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2015)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2015 <- uf_animals_2015 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2015) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2015
+rabies_domestic_feline <- readxl::read_excel("01_data/02_rabies/03_final/cases_cats_dogs.xlsx", sheet = 2)
+rabies_domestic_feline
 
-uf_animals_2016 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2016.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2016)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2016)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2016 <- uf_animals_2016 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2016) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2016
+### rabies humans ----
+rabies_humans_msinf <- readxl::read_excel("01_data/02_rabies/03_final/cases_humans_v02.xlsx", sheet = 1) %>% 
+    dplyr::mutate(CONTACT = na_if(CONTACT, "-"),
+                  VARIANT = na_if(VARIANT, "-"),
+                  CD_MUN = as.numeric(CD_MUN))
+rabies_humans_msinf
 
-uf_animals_2017 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2017.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2017)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2017)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2017 <- uf_animals_2017 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2017) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2017
+rabies_humans_sinf1 <- readxl::read_excel("01_data/02_rabies/03_final/cases_humans_v02.xlsx", sheet = 3) %>% 
+    dplyr::mutate(CONTACT = na_if(CONTACT, "-"),
+                  CD_MUN = as.numeric(CD_MUN))
+rabies_humans_sinf1
 
-uf_animals_2018 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2018.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2018)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2018)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2018 <- uf_animals_2018 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2018) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2018
+rabies_humans_sinf7 <- readxl::read_excel("01_data/02_rabies/03_final/cases_humans_v02.xlsx", sheet = 5) %>% 
+    dplyr::mutate(CONTACT = na_if(CONTACT, "-"),
+                  CD_MUN = as.numeric(CD_MUN)) %>% 
+    dplyr::filter(YEAR %in% c(2007:2009))
+rabies_humans_sinf7
 
-uf_animals_2019 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2019.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2019)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2019)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2019 <- uf_animals_2019 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2019) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2019
+rabies_humans_snot1 <- readxl::read_excel("01_data/02_rabies/03_final/cases_humans_v02.xlsx", sheet = 2) %>% 
+    dplyr::mutate(CONTACT = na_if(CONTACT, "-"))
+rabies_humans_snot1
 
-uf_animals_2020 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2020.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2020)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2020)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2020 <- uf_animals_2020 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2020) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2020
+rabies_humans_snot7 <- readxl::read_excel("01_data/02_rabies/03_final/cases_humans_v02.xlsx", sheet = 4)
+rabies_humans_snot7
 
-uf_animals_2021 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2021.xlsx", sheet = 2) %>%
-    dplyr::slice(-c(1, 34))
-colnames(uf_animals_2021)[7] <- "Quiroptéros_Hematófagos"
-colnames(uf_animals_2021)[8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2021 <- uf_animals_2021 %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2021) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2021
+## data at the states level ----
 
-uf_animals_2022 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2022.xlsx") %>%
-    dplyr::slice(-c(1, 36:37)) %>% 
-    janitor::clean_names()
-uf_animals_2022[1, 7] <- "Quiroptéros_Hematófagos"
-uf_animals_2022[1, 8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2022 <- uf_animals_2022 %>% 
-    setNames(uf_animals_2022[1, ]) %>% 
-    dplyr::slice(-c(1:2)) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2022) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric))
-uf_animals_2022
+### uf_cases_all_animals ----
+rabies_cases_all_animals <- NULL
 
-uf_animals_2023 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2023.xlsx") %>%
-    dplyr::slice(-c(1, 36:37)) %>% 
-    janitor::clean_names()
-uf_animals_2023[1, 7] <- "Quiroptéros_Hematófagos"
-uf_animals_2023[1, 8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2023 <- uf_animals_2023 %>% 
-    setNames(uf_animals_2023[1, ]) %>% 
-    dplyr::slice(-c(1:2)) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2023) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric)) %>% 
-    dplyr::rename(bovina = bovino,
-                  equina = equino,
-                  suina_caprina_ovina_e_outros_herbivoros = suino_caprino_ovino_e_outros_herb)
-uf_animals_2023
+year <- readxl::excel_sheets("01_data/02_rabies/03_final/uf_cases_all_animals.xlsx")[-11]
+year <- rev(year)
+year
 
-uf_animals_2024 <- readxl::read_excel(path = "01_data/02_rabies/01_cleaned/rabies_animals/UF_x_animais_2024.xlsx") %>%
-    dplyr::slice(-c(1, 36:37)) %>% 
-    janitor::clean_names()
-uf_animals_2024[1, 7] <- "Quiroptéros_Hematófagos"
-uf_animals_2024[1, 8] <- "Quiroptéros_Não Hematófagos"
-uf_animals_2024 <- uf_animals_2024 %>% 
-    setNames(uf_animals_2024[1, ]) %>% 
-    dplyr::slice(-c(1:2)) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::mutate(year = 2024) %>% 
-    dplyr::mutate(across(-regiao_uf, as.numeric)) %>% 
-    dplyr::rename(bovina = bovino,
-                  equina = equino,
-                  suina_caprina_ovina_e_outros_herbivoros = suino_caprino_ovino_e_outros_herb)
-uf_animals_2024
+for(i in 1:10){
+    
+    rabies_cases_all_animals_i <- readxl::read_excel("01_data/02_rabies/03_final/uf_cases_all_animals.xlsx", sheet = i)
+    rabies_cases_all_animals <- dplyr::bind_rows(rabies_cases_all_animals, rabies_cases_all_animals_i)
+    
+}
 
-# combine
-uf_animals <- dplyr::bind_rows(
-    uf_animals_2015, uf_animals_2016, uf_animals_2017, uf_animals_2018, 
-    uf_animals_2019, uf_animals_2020, uf_animals_2021, uf_animals_2022,
-    uf_animals_2023, uf_animals_2024) %>% 
-    dplyr::select(-year) %>% 
-    dplyr::group_by(regiao_uf) %>% 
-    dplyr::summarise(across(
-        .cols = where(is.numeric),
-        .fns = list(sum = sum),
-        .names = "{.col}"))
-uf_animals
+rabies_cases_all_animals
+
+### cases map ----
+rabies_cases_map <- NULL
+
+animal <- readxl::excel_sheets("01_data/02_rabies/03_final/uf_cases_mapa.xlsx")[-6]
+animal
+
+for(i in 1:5){
+    
+    rabies_cases_map_i <- readxl::read_excel("01_data/02_rabies/03_final/uf_cases_mapa.xlsx", sheet = i)
+    rabies_cases_map <- dplyr::bind_rows(rabies_cases_map, rabies_cases_map_i)
+    
+}
+rabies_cases_map
+
+# pivot data --------------------------------------------------------------
+
+# canine
+rabies_domestic_canine_pivot <- rabies_domestic_canine %>% 
+    tidyr::pivot_wider(id_cols = CD_MUN:NM_REG, 
+                       names_from = ANIMAL:YEAR, 
+                       values_from = CASES,
+                       values_fill = 0)
+rabies_domestic_canine_pivot
+
+# feline
+rabies_domestic_feline_pivot <- rabies_domestic_feline %>% 
+    tidyr::pivot_wider(id_cols = CD_MUN:NM_REG, 
+                       names_from = ANIMAL:YEAR, 
+                       values_from = CASES,
+                       values_fill = 0)
+rabies_domestic_feline_pivot
+
+### rabies humans ----
+rabies_humans_msinf_pivot <- rabies_humans_msinf %>% 
+    tidyr::pivot_wider(id_cols = CD_MUN:NM_REG, 
+                       names_from = CONTACT:YEAR, 
+                       values_from = CASES_H,
+                       values_fill = 0)
+rabies_humans_msinf_pivot
+
+rabies_humans_sinf_pivot <- rabies_humans_sinf1 %>% 
+    dplyr::bind_rows(rabies_humans_sinf7) %>% 
+    dplyr::arrange(YEAR) %>% 
+    tidyr::pivot_wider(id_cols = CD_MUN:NM_REG, 
+                       names_from = CONTACT:YEAR, 
+                       values_from = CASES_H,
+                       values_fill = 0)
+rabies_humans_sinf_pivot
+
+rabies_humans_snot_pivot <- rabies_humans_snot1 %>% 
+    dplyr::bind_rows(rabies_humans_snot7) %>% 
+    dplyr::arrange(YEAR) %>% 
+    tidyr::pivot_wider(id_cols = CD_MUN:NM_REG, 
+                       names_from = CONTACT:YEAR, 
+                       values_from = CASES_H,
+                       values_fill = 0)
+rabies_humans_snot_pivot
+
+rabies_cases_all_animals_pivot <- rabies_cases_all_animals %>% 
+    dplyr::arrange(YEAR) %>% 
+    tidyr::pivot_wider(id_cols = CD_UF:NM_REG, 
+                       names_from = ANIMAL:YEAR, 
+                       values_from = CASES,
+                       values_fill = 0)
+rabies_cases_all_animals_pivot
+
+rabies_cases_map_pivot_values <- rabies_cases_map %>% 
+    dplyr::arrange(YEAR) %>% 
+    tidyr::pivot_wider(id_cols = CD_UF:NM_UF, 
+                       names_from = c(ANIMAL, YEAR), 
+                       values_from = CASES,
+                       values_fill = 0)
+rabies_cases_map_pivot_values
+
+rabies_cases_map_pivot_focus <- rabies_cases_map %>% 
+    dplyr::arrange(YEAR) %>% 
+    tidyr::pivot_wider(id_cols = CD_UF:NM_UF, 
+                       names_from = c(ANIMAL, YEAR), 
+                       values_from = FOCUS,
+                       values_fill = 0)
+rabies_cases_map_pivot_focus
+
+# data summary ----------------------------------------------------------
+
+# summary
+rabies_domestic_canine_sum <- rabies_domestic_canine %>% 
+    dplyr::group_by(CD_MUN, NM_MUN, CD_UF, NM_UF) %>% 
+    dplyr::summarise(CASES = sum(CASES)) %>% 
+    dplyr::mutate(CD_MUN = as.character(CD_MUN),
+                  CD_UF = as.character(CD_UF)) %>% 
+    dplyr::rename(RABIES_CASES_DOMESTIC_CANINE = CASES)
+rabies_domestic_canine_sum
+
+rabies_domestic_feline_sum <- rabies_domestic_feline %>% 
+    dplyr::group_by(CD_MUN, NM_MUN, CD_UF, NM_UF) %>% 
+    dplyr::summarise(CASES = sum(CASES)) %>% 
+    dplyr::mutate(CD_MUN = as.character(CD_MUN),
+                  CD_UF = as.character(CD_UF)) %>% 
+    dplyr::rename(RABIES_CASES_DOMESTIC_FELINE = CASES)
+rabies_domestic_feline_sum
+
+rabies_humans_snot_sum <- rabies_humans_snot1 %>%
+    dplyr::bind_rows(rabies_humans_snot7) %>% 
+    dplyr::group_by(CD_MUN, NM_MUN, CD_UF, NM_UF) %>% 
+    dplyr::summarise(CASES = sum(CASES_H)) %>% 
+    dplyr::mutate(CD_MUN = as.character(CD_MUN),
+                  CD_UF = as.character(CD_UF)) %>% 
+    dplyr::rename(RABIES_CASES_HUMAN_NOTIFICATION = CASES)
+rabies_humans_snot_sum
+
+rabies_humans_sinf_sum <- rabies_humans_sinf1 %>% 
+    dplyr::bind_rows(rabies_humans_sinf7) %>% 
+    dplyr::bind_rows(rabies_humans_msinf) %>% 
+    dplyr::group_by(CD_MUN, NM_MUN, CD_UF, NM_UF) %>% 
+    dplyr::summarise(CASES = sum(CASES_H)) %>% 
+    dplyr::mutate(CD_MUN = as.character(CD_MUN),
+                  CD_UF = as.character(CD_UF)) %>% 
+    dplyr::rename(RABIES_CASES_HUMAN_INFECTION = CASES)
+rabies_humans_sinf_sum
+
+rabies_cases_all_animals_sum <- rabies_cases_all_animals %>% 
+    dplyr::group_by(CD_UF, NM_UF, ANIMAL) %>% 
+    dplyr::summarise(CASES = sum(CASES)) %>% 
+    dplyr::mutate(CD_UF = as.character(CD_UF)) %>% 
+    tidyr::pivot_wider(id_cols = c(CD_UF, NM_UF), 
+                       names_from = ANIMAL, values_from = "CASES") %>% 
+    dplyr::mutate(across(everything(), ~replace_na(., 0)))
+rabies_cases_all_animals_sum
+
+rabies_cases_map_sum <- rabies_cases_map %>% 
+    dplyr::group_by(CD_UF, NM_UF, ANIMAL) %>% 
+    dplyr::summarise(CASES = sum(CASES)) %>% 
+    dplyr::mutate(CD_UF = as.character(CD_UF)) %>% 
+    tidyr::pivot_wider(id_cols = c(CD_UF, NM_UF), 
+                       names_from = ANIMAL, values_from = "CASES") %>% 
+    dplyr::mutate(across(everything(), ~replace_na(., 0)))
+rabies_cases_map_sum
 
 # export
-readr::write_csv(uf_animals, "01_data/02_rabies/02_summarized/rabies_animals.csv")
-
-# rabies_humans -----------------------------------------------------------
-
-# atend
-rabies_humans_atend_files <- dir("01_data/02_rabies/01_cleaned/rabies_humans/atend_antir", full.names = TRUE)
-rabies_humans_atend_files
-
-rabies_humans_atend <- NULL
-for(i in 1:length(rabies_humans_atend_files)){
-    
-    if(i == 1){
-        
-        rabies_humans_atend_i <- readr::read_tsv(rabies_humans_atend_files[i]) %>% 
-            janitor::clean_names() %>% 
-            dplyr::mutate(across(everything(), as.character))
-        
-    }else{
-        
-        rabies_humans_atend_i <- readr::read_csv(rabies_humans_atend_files[i]) %>% 
-            janitor::clean_names() %>% 
-            dplyr::mutate(across(everything(), as.character))
-        
-    }
-    
-    rabies_humans_atend <- dplyr::bind_rows(rabies_humans_atend, rabies_humans_atend_i)
-    
-}
-rabies_humans_atend
-
-# notif
-rabies_humans_notif_files <- dir("01_data/02_rabies/01_cleaned/rabies_humans/notif_raiva/", full.names = TRUE)
-rabies_humans_notif_files
-
-rabies_humans_notif <- NULL
-for(i in 1:length(rabies_humans_notif_files)){
-    
-    rabies_humans_notif_i <- readr::read_csv(rabies_humans_notif_files[i]) %>% 
-        janitor::clean_names() %>% 
-        dplyr::mutate(across(everything(), as.character))
-    
-    rabies_humans_notif <- dplyr::bind_rows(rabies_humans_notif, rabies_humans_notif_i)
-    
-}
-rabies_humans_notif
-
-# casos_human_uf
-casos_hum_uf_90_24 <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_humans/casos_human_uf_90-24.xlsx", sheet = 2) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::rowwise() %>% 
-    dplyr::mutate(sum = sum(c_across(where(is.numeric)), na.rm = TRUE)) %>% 
-    dplyr::ungroup() %>% 
-    dplyr::select(regiao_uf, sum)
-casos_hum_uf_90_24
-
-# casos_hum_x_animais_10-24
-casos_hum_uf_10_24 <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_humans/casos_hum_uf_10-24.xlsx", sheet = 2) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::rowwise() %>% 
-    dplyr::mutate(sum = sum(c_across(where(is.numeric)), na.rm = TRUE)) %>% 
-    dplyr::ungroup() %>% 
-    dplyr::select(regiao_uf, sum)
-casos_hum_uf_10_24
-
-# casos_hum_mun_animal_10-24
-casos_hum_mun_10_24 <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_humans/casos_hum_mun_animal_10-24.xlsx", sheet = 2) %>% 
-    janitor::clean_names() %>% 
-    dplyr::filter(!regiao_uf %in% c("Brasil", "Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")) %>% 
-    dplyr::rowwise() %>% 
-    dplyr::mutate(sum = sum(c_across(where(is.numeric)), na.rm = TRUE)) %>% 
-    dplyr::ungroup() %>% 
-    dplyr::select(regiao_uf, sum)
-casos_hum_mun_10_24
-
-
-# rabies_rural -----------------------------------------------------------
-
-rabies_rural <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_rural/casos_raiva_animais_05-17.xlsx")
-rabies_rural
-
-rabies_rural <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_rural/raiva_animais_rurais.xlsx")
-rabies_rural
-
-rabies_rural <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_rural/raiva_bov.xlsx")
-rabies_rural
-
-# rabies_urban -----------------------------------------------------------
-
-rabies_urban <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_urban/casos_can_municipio_15-24.xlsx")
-rabies_urban
-
-rabies_urban <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_urban/raiva_can_fel.xlsx")
-rabies_urban
-
-# rabies_wild -----------------------------------------------------------
-
-rabies_wild <- readxl::read_excel("01_data/02_rabies/01_cleaned/rabies_wild/raiva_silvestres.xlsx")
-rabies_wild
-
-# export -----------------------------------------------------------------
-
-readr::write_csv(rabies_humans_atend, "01_data/02_rabies/02_summarized/rabies_humans_atend.csv")
-readr::write_csv(rabies_humans_notif, "01_data/02_rabies/02_summarized/rabies_humans_notif.csv")
-readr::write_csv(rabies_wild, "01_data/02_rabies/02_summarized/rabies_wild.csv")
+readr::write_csv(rabies_domestic_canine_sum, "03_prioritization/data_mun_rabies_domestic_canine_sum.csv")
+readr::write_csv(rabies_domestic_feline_sum, "03_prioritization/data_mun_rabies_domestic_feline_sum.csv")
+readr::write_csv(rabies_humans_snot_sum, "03_prioritization/data_mun_rabies_humans_snot_sum.csv")
+readr::write_csv(rabies_humans_sinf_sum, "03_prioritization/data_mun_rabies_humans_sinf_sum.csv")
+readr::write_csv(rabies_cases_all_animals_sum, "03_prioritization/data_mun_rabies_cases_all_animals_sum.csv")
+readr::write_csv(rabies_cases_map_sum, "03_prioritization/data_mun_rabies_cases_map_sum.csv")
 
 # end ---------------------------------------------------------------------

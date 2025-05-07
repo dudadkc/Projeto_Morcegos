@@ -1,5 +1,5 @@
 #' ---
-#' title: modelos - regional - buffer
+#' title: sdm - fit
 #' author: mauricio vancine
 #' date: 2024-04-08
 #' ---
@@ -14,6 +14,7 @@ gc()
 library(tidyverse)
 library(ggsci)
 library(sf)
+library(raster)
 library(terra)
 library(dismo)
 library(ecospat)
@@ -34,7 +35,7 @@ dir(system.file("java", package = "dismo"))
 # import data -------------------------------------------------------------
 
 # occ
-occ <- readr::read_csv("01_data/00_occurrences/01_clean/00_occ_cleaned.csv") %>% 
+occ <- readr::read_csv("01_data/00_occurrences/01_clean/01_occ_cleaned.csv") %>% 
     dplyr::mutate(species = "Desmodus rotundus")
 occ
 
@@ -59,15 +60,15 @@ tm_shape(neo) +
 
 # covar
 covar_clim <- terra::rast("01_data/01_variables/01_climate/01_adjusted/climate_neo.tif")
-covar_topo <- terra::rast("01_data/01_variables/02_topography/01_adjusted/topography_neo.tif")
-covar_hydro <- terra::rast("01_data/01_variables/03_hidrology/01_adjusted/hydrology_neo.tif")
-covar_cave <- terra::rast("01_data/01_variables/04_caves/01_adjusted/caves_neo.tif")
+covar_topo <- terra::rast("01_data/01_variables/02_topography/01_adjusted/topography_neo.tif")[[-1]]
+covar_cave <- log10(terra::rast("01_data/01_variables/04_caves/01_adjusted/caves_neo.tif") + 1)
 
-covar <- c(covar_clim, covar_topo, covar_hydro, covar_cave)
+range(values(covar_cave), na.rm = TRUE)
+
+covar <- c(covar_clim, covar_topo, covar_cave)
 covar
 
 names(covar)
-
 plot(covar[[1]])
 
 # sdm ---------------------------------------------------------------------
@@ -77,13 +78,6 @@ tune_args <- list(fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"), rm = seq(.5, 4
 tune_args
 
 # enmeval
-## species ----
-occ_i <- occ %>% 
-    tidyr::drop_na(longitude, latitude) %>% 
-    dplyr::slice_sample(n = 300) %>% 
-    dplyr::select(3:4)
-
-occ_v <- terra::vect(occ_i, geom = c("longitude", "latitude"), crs = "EPSG:4326")
 
 ## covariates selection ----
 covar_vif <- usdm::vifstep(covar, th = 2)
@@ -92,19 +86,31 @@ names(covar_sel)
 
 ## sdm ----
 
+## species ----
+occ_i <- occ %>% 
+    tidyr::drop_na(longitude, latitude) %>% 
+    dplyr::select(3:4)
+occ_i
+
 ### data ----
 bg <- terra::spatSample(x = covar_sel[[1]], size = 1e4, "random", as.df = TRUE, xy = TRUE, values = FALSE, na.rm = TRUE)
 colnames(bg) <- colnames(occ_i)
 
+occs_z <- cbind(occ_i, terra::extract(covar_sel, occ_i, ID = FALSE))
+bg_z <- cbind(bg, terra::extract(covar_sel, bg))
+
+plot(bg_z[, 1:2])
+points(occs_z[, 1:2], pch = 20, col = "red")
+
 ### fit ----
-eval_fit <- ENMeval::ENMevaluate(occs = occ_i,
-                                 env = covar_sel,
-                                 bg = bg,
+eval_fit <- ENMeval::ENMevaluate(occs = occs_z, 
+                                 bg = bg_z,
                                  tune.args = tune_args, 
                                  algorithm = "maxent.jar", 
                                  partitions = "block",
                                  parallel = TRUE, 
-                                 numCores = 6)
+                                 numCores = 10)
+eval_fit
 
 ### occs, bg and partitions ----
 eval_occs <- cbind(eval_fit@occs.grp, eval_fit@occs)
@@ -135,8 +141,8 @@ eval_resul <- eval_fit@results
 eval_resul_partitions <- eval_fit@results.partitions
 
 ### selection ----
-eval_resul_aic <-  dplyr::filter(eval_resul, delta.AICc == 0)[1, ]
-eval_fit_aic <- eval.models(eval_fit)[[eval_resul_aic$tune.args]]
+eval_resul_aic <- dplyr::filter(eval_resul, delta.AICc == 0)[1, ]
+eval_fit_aic <- eval.models(eval_fit)[[as.character(eval_resul_aic$tune.args)]]
 
 # plot_delta_aicc_tune_args <- ggplot(eval_resul, aes(x = rm, y = delta.AICc, color = fc, group = fc)) +
 #     geom_line() +
@@ -191,9 +197,13 @@ plot_covar_imp <- ggplot(eval_resul_aic_varimp,
     scale_x_continuous(labels = scales::percent_format(scale = 1)) +
     labs(x = "Percent contribution", y = "") +
     theme_bw(base_size = 20) 
+plot_covar_imp
 
 ### covariate response ----
 eval_resul_aic_response <- NULL
+
+dismo::response(eval.models(eval_fit)[[eval_resul_aic$tune.args]])
+
 for(j in covar_vif@results$Variables){
     
     eval_resul_aic_response_i <- tibble::as_tibble(dismo::response(eval.models(eval_fit)[[eval_resul_aic$tune.args]], var = j)) %>% 
@@ -208,9 +218,16 @@ plot_covar_res <- ggplot(eval_resul_aic_response, aes(x = value, y = predict)) +
     facet_wrap(~covar, scales = "free") +
     labs(x = "Values", y = "Cloglog") +
     theme_bw(base_size = 20)
+plot_covar_res
 
 ### prediction ----
-eval_fit_aic_predict <- ENMeval::eval.predictions(eval_fit)[[as.character(eval_resul_aic$tune.args)]]
+eval_fit_aic_predict <- enm.maxent.jar@predict(
+    mod = eval_fit@models[[as.character(eval_resul_aic$tune.args)]], 
+    envs = covar_sel, 
+    other.settings = list(pred.type = "cloglog"))
+eval_fit_aic_predict
+
+plot(eval_fit_aic_predict)
 
 ## threshold ----
 ev <- dismo::evaluate(p = terra::extract(eval_fit_aic_predict, eval_fit@occs[, 1:2], ID = FALSE)[, 1], 
@@ -221,6 +238,10 @@ eval_fit_aic_predict_thr_equal_sens_spec <- eval_fit_aic_predict >= thr$equal_se
 eval_fit_aic_predict_thr_sensitivity <- eval_fit_aic_predict >= thr$sensitivity
 eval_fit_aic_predict_thr_spec_sens <- eval_fit_aic_predict >= thr$spec_sens
 
+plot(eval_fit_aic_predict_thr_equal_sens_spec)
+plot(eval_fit_aic_predict_thr_spec_sens)
+plot(eval_fit_aic_predict_thr_sensitivity)
+
 ### tss ---
 thr_id <- NULL
 for(j in names(threshold(ev))) thr_id <- c(thr_id, which(ev@t == dismo::threshold(ev, j)))
@@ -230,7 +251,7 @@ thr_tss <- rbind(thr, tss)
 thr_tss <- cbind(data.frame(metrics = c("thresholds", "tss")), thr_tss)
 
 ## export ----
-path_sp <- paste0("02_models/03_01_sdms_teste2")
+path_sp <- paste0("02_results/03_01_sdms_v07")
 
 dir.create(path = path_sp)
 

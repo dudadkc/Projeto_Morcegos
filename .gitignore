@@ -4,5 +4,8 @@
 .Ruserdata
 
 /01_data/01_variables/
-/01_data/03_municipalities/ 
+/01_data/03_socioeconomic/
+/01_data/04_landscape/
+/01_data/05_municipalities/
 /02_results/
+/03_prioritization/

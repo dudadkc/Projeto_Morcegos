@@ -7,7 +7,7 @@
 # prepare r -------------------------------------------------------------
 
 # options
-options(scipen = 2, java.parameters = "-Xmx14g")
+options(scipen = 2, java.parameters = "-Xmx32g")
 gc()
 
 # packages
@@ -35,7 +35,7 @@ dir(system.file("java", package = "dismo"))
 # import data -------------------------------------------------------------
 
 # occ
-occ <- readr::read_csv("01_data/00_occurrences/01_clean/01_occ_cleaned.csv") %>% 
+occ <- readr::read_csv("01_data/00_occurrences/01_clean/01_occ_cleaned_thin20km.csv") %>% 
     dplyr::mutate(species = "Desmodus rotundus")
 occ
 
@@ -60,37 +60,33 @@ tm_shape(neo) +
 
 # covar
 covar_clim <- terra::rast("01_data/01_variables/01_climate/01_adjusted/climate_neo.tif")
-covar_topo <- terra::rast("01_data/01_variables/02_topography/01_adjusted/topography_neo.tif")
+covar_topo <- terra::rast("01_data/01_variables/02_topography/01_adjusted/topography_neo.tif")[[-1]]
 covar_hydro <- terra::rast("01_data/01_variables/03_hidrology/01_adjusted/hydrology_neo.tif")
 covar_cave <- terra::rast("01_data/01_variables/04_caves/01_adjusted/caves_neo.tif")
 
-covar <- c(covar_clim, covar_topo, covar_hydro, covar_cave)
+range(values(covar_hydro), na.rm = TRUE)
+range(values(covar_cave), na.rm = TRUE)
+
+covar <- c(covar_clim, covar_topo, covar_cave, covar_hydro)
 covar
 
 names(covar)
-
 plot(covar[[1]])
 
-# sdm ---------------------------------------------------------------------
-
-# tune args
-tune_args <- list(fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"), rm = seq(.5, 4, .5))
-tune_args
-
-# enmeval
-
-## covariates selection ----
-covar_vif <- usdm::vifstep(covar, th = 2)
-covar_sel <- usdm::exclude(covar, covar_vif)
-names(covar_sel)
-
-## sdm ----
+# prepare data ------------------------------------------------------------
 
 ## species ----
 occ_i <- occ %>% 
     tidyr::drop_na(longitude, latitude) %>% 
     dplyr::select(3:4)
 occ_i
+
+## covariates selection ----
+covar_vif <- usdm::vifstep(covar, th = 2)
+covar_sel <- usdm::exclude(covar, covar_vif)
+names(covar_sel)
+
+# sdm ---------------------------------------------------------------------
 
 ### data ----
 bg <- terra::spatSample(x = covar_sel[[1]], size = 1e4, "random", as.df = TRUE, xy = TRUE, values = FALSE, na.rm = TRUE)
@@ -101,6 +97,10 @@ bg_z <- cbind(bg, terra::extract(covar_sel, bg))
 
 plot(bg_z[, 1:2])
 points(occs_z[, 1:2], pch = 20, col = "red")
+
+### tune args ----
+tune_args <- list(fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT"), rm = seq(.5, 4, .5))
+tune_args
 
 ### fit ----
 eval_fit <- ENMeval::ENMevaluate(occs = occs_z, 
@@ -202,11 +202,9 @@ plot_covar_imp
 ### covariate response ----
 eval_resul_aic_response <- NULL
 
-dismo::response(eval.models(eval_fit)[[6]], var = j)
-
 for(j in covar_vif@results$Variables){
     
-    eval_resul_aic_response_i <- tibble::as_tibble(dismo::response(eval.models(eval_fit)[[3]], var = j)) %>% 
+    eval_resul_aic_response_i <- tibble::as_tibble(dismo::response(eval.models(eval_fit)[[eval_resul_aic$tune.args]], var = j)) %>% 
         dplyr::rename(value = 1, predict = 2) %>% 
         dplyr::mutate(covar = j)
     eval_resul_aic_response <- rbind(eval_resul_aic_response, eval_resul_aic_response_i) 
@@ -223,9 +221,8 @@ plot_covar_res
 ### prediction ----
 eval_fit_aic_predict <- enm.maxent.jar@predict(
     mod = eval_fit@models[[as.character(eval_resul_aic$tune.args)]], 
-    envs = raster::stack(covar_sel), 
-    other.settings = list(pred.type = "cloglog")) %>% 
-    terra::rast()
+    envs = covar_sel, 
+    other.settings = list(pred.type = "cloglog"))
 eval_fit_aic_predict
 
 plot(eval_fit_aic_predict)
@@ -252,7 +249,7 @@ thr_tss <- rbind(thr, tss)
 thr_tss <- cbind(data.frame(metrics = c("thresholds", "tss")), thr_tss)
 
 ## export ----
-path_sp <- paste0("02_results/03_01_sdms_v04")
+path_sp <- paste0("02_results/03_01_sdms_v09")
 
 dir.create(path = path_sp)
 
