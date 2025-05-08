@@ -1,0 +1,98 @@
+---
+title: "metadata"
+author: "Renata Muylaert"
+date: "2025-05-08"
+output: html_document
+---
+
+## Column names and attributes
+
+### Check :triangular_flag_on_post:
+
+Exposure
+Children population
+TOTAL 
+
+Hazard
+Dog immunisation coverage
+CANINE_VACCINATED
+FELINE_VACCINATED
+
+Vulnerability
+Total Health Expenditure
+SPENDING_HEALTH
+
+Vulnerability
+Spent on Epidemiological Surveillance
+SPENDING_EPIDEMIO_SURV
+
+Vulnerability
+Spent on Basic Care
+SPENDING_BASIC_CARE
+
+### OK :white_check_mark:
+
+Historical risk
+Historical rabies presence 
+RABIES_CASES_HUMAN_INFECTION
+
+Exposure
+Inadequate walls
+
+Exposure
+Population density
+HAB_KM2
+
+Exposure
+Number of population / Urban and rural population
+PUrban
+PRural
+AREA_KM2
+
+Exposure
+Secondary road density
+roads_density_km
+
+Exposure
+Indigenous community
+PIndig
+
+Hazard
+Vampire bat current presence
+sdm_cont_mn
+
+Hazard
+Cattle population
+CATTLE_POP
+
+Vulnerability
+Travel time to hospital
+
+
+Vulnerability
+Gini Index
+GINI_INDEX
+
+Vulnerability
+Percentage of Poor People
+PCT_POOR
+
+Vulnerability
+Municipal Human Development Index
+IDHM
+
+Vulnerability
+Municipal Human Development Index - Education
+IDHM_EDU 
+
+Vulnerability
+Literacy Rate
+RT_LITE 
+
+Vulnerability
+Average Number of Years of Study
+YEARS
+
+Exposure
+Pasture
+pasture_pct
