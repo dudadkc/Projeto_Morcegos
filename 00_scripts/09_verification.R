@@ -34,11 +34,11 @@ unique(d$CANINE_VACCINATED)
 unique(d$FELINE_VACCINATED)
 
 # check health 
-table(df$SPENDING_EPIDEMIO_SURV)
+table(d$SPENDING_EPIDEMIO_SURV)
 
 d$PRural <- as.numeric(d$PRural)
 
-str(df)
+str(d)
 
 # correlation
 
