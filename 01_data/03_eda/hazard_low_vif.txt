@@ -1,0 +1,3 @@
+sdm_cont_mn
+CATTLE_POP
+CANINE_VACCINATED

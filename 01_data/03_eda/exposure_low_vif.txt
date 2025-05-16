@@ -1,0 +1,7 @@
+WALL
+HAB_KM2
+PRural
+roads_density_km
+CHILDREN
+PIndig
+pasture_pct
