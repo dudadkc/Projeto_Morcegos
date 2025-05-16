@@ -9,8 +9,6 @@ library(sf)
 require(corrplot)
 require(DataExplorer)
 require(here)
-library(DataExplorer)
-library(GGally)
 library(corrplot)
 
 
