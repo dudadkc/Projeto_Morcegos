@@ -45,7 +45,7 @@ d <- rescale_and_average(d, exposure_names, "exposure")
 map_hazard <- ggplot(d) +
     geom_sf(aes(fill = hazard_average),  color = 'gray20', size = 0.02) +
     #scale_fill_viridis_c(name = "Hazard", option = "inferno") +
-    scale_fill_gradient(high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
+    scale_fill_gradient(name = "Hazard", high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
     ggtitle("Rescaled Hazard Average") +
     theme_minimal()
 
@@ -58,18 +58,33 @@ map_vulnerability <- ggplot(d) +
     ggtitle("Rescaled Vulnerability Average") +
     theme_minimal()
 
+map_vulnerability
+
 map_exposure <- ggplot(d) +
     geom_sf(aes(fill = exposure_average), color = 'gray20', size = 0.02) +
     scale_fill_viridis_c(name = "Exposure", option = "viridis") +
     ggtitle("Rescaled Exposure Average") +
     theme_minimal()
 
+map_exposure
+
 # all
 library(ggpubr)
 setwd(here())
 setwd('99_manuscript')
+# width = 22, height = 30
+jpeg(filename = "rabies_risk_components_wide.jpg", width = 30, height = 22, units = "cm", res = 400)
+ggarrange(
+    map_hazard,
+    map_vulnerability,
+    map_exposure,
+    ncol = 3,
+    nrow = 1,
+    align = "v"
+)
+dev.off()
 
-jpeg(filename = "rabies_risk_components.jpg", width = 22, height = 30, units = "cm", res = 400)
+jpeg(filename = "rabies_risk_components_long.jpg", width = 22, height = 30, units = "cm", res = 400)
 ggarrange(
     map_hazard,
     map_vulnerability,
@@ -79,6 +94,8 @@ ggarrange(
     align = "v"
 )
 dev.off()
+
+
 
 # historic risk 
 top5_labels <- d %>%
@@ -104,10 +121,8 @@ map_historic_risk <- ggplot(d) +
         option = "magma",
         na.value = "white"
     ) +
-    labs(
-        title = "Rabies Historical Risk",
-        fill = "Human rabies cases"  # explicitly naming the fill to avoid defaults
-    ) +
+    labs(      title = "Rabies Historical Risk",
+        fill = "Human rabies cases" ) +
     ggtitle("Rabies Historic Risk") +
     theme_minimal()
 
