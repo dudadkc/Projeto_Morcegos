@@ -10,7 +10,7 @@ require(here)
 require(RColorBrewer)
 
 
-d <- st_read('D://OneDrive - Massey University//Supervisions//Madu//03_prioritization//00_mun_data.gpkg')
+d <- st_read('C://Users//rdelaram//Downloads//00_mun_data.gpkg')
 
 d$PRural <- as.numeric(d$PRural)
 
@@ -36,44 +36,129 @@ rescale_and_average <- function(data, var_names, prefix) {
     return(data)
 }
 
+# Arranging the scale for positive expectations
 
+summary(d$CANINE_VACCINATED)
+d$CANINE_VACCINATED <- d$CANINE_VACCINATED*(-1)
+summary(d$CANINE_VACCINATED)
+
+d$RT_LITE <- d$RT_LITE*(-1)
+
+plot(d$SPENDING_BASIC_CARE ~ d$PTotal)
+plot(d$SPENDING_EPIDEMIO_SURV ~  d$PTota)
+plot(d$SPENDING_HEALTH~  d$PTota)
+
+d$HAB_KM2
+ggplot(d, aes(x = HAB_KM2, y = SPENDING_HEALTH, 
+              size = RABIES_CASES_HUMAN_INFECTION, 
+              color = RABIES_CASES_HUMAN_INFECTION)) +
+    geom_point(alpha = 0.7) +
+    scale_size_continuous(range = c(2, 10)) +
+    scale_color_gradient(low = "skyblue", high = "firebrick") +
+    labs(x = "People / sq km", y = "Spending on Health", 
+         size = "Human Rabies Cases", 
+         color = "Human Rabies Cases") +
+    theme_minimal()
+
+
+ggplot(d, aes(x = HAB_KM2, y = SPENDING_BASIC_CARE, 
+              size = RABIES_CASES_HUMAN_INFECTION, 
+              color = RABIES_CASES_HUMAN_INFECTION)) +
+    geom_point(alpha = 0.7) +
+    scale_size_continuous(range = c(2, 10)) +
+    scale_color_gradient(low = "skyblue", high = "firebrick") +
+    labs(x = "People / sq km", y = "Spending on Basic Care", 
+         size = "Human Rabies Cases", 
+         color = "Human Rabies Cases") +
+    theme_minimal()
+
+
+ggplot(d, aes(x = HAB_KM2, y = SPENDING_EPIDEMIO_SURV, 
+              size = RABIES_CASES_HUMAN_INFECTION, 
+              color = RABIES_CASES_HUMAN_INFECTION)) +
+    geom_point(alpha = 0.7) +
+    scale_size_continuous(range = c(2, 10)) +
+    scale_color_gradient(low = "skyblue", high = "firebrick") +
+    labs(x = "People / sq km", y = "Spending on Epidemiological Surveillance", 
+         size = "Human Rabies Cases", 
+         color = "Human Rabies Cases") +
+    theme_minimal()
+
+
+d <- d %>%
+    mutate(RabiesKnown = ifelse(!is.na(RABIES_CASES_HUMAN_INFECTION), "Rabies confirmed", "Unknown"))
+
+
+d %>%   mutate(RabiesKnown = ifelse(!is.na(RABIES_CASES_HUMAN_INFECTION), "Rabies confirmed", "Unknown")) %>%
+    group_by(RabiesKnown) %>%
+    summarise(
+        mean_spending = mean(SPENDING_HEALTH, na.rm = TRUE),
+        sd_spending = sd(SPENDING_HEALTH, na.rm = TRUE),
+        n = n()
+    )
+
+
+# Plot density histogram
+ggplot(d, aes(x = RabiesKnown, y = SPENDING_EPIDEMIO_SURV, fill = RabiesKnown)) +
+    geom_violin(trim = FALSE, alpha = 0.6) +
+    #geom_boxplot(width = 0.1, outlier.shape = NA) +
+    scale_fill_manual(values = c("Rabies confirmed" = "firebrick", "Unknown" = "grey")) +
+    labs(title = "Spending on Epidemiological Surveillance by Rabies cases",
+         x = "Rabies Infection Data",
+         y = "Spending on Epidemiological Surveillance") +
+    theme_minimal()
+
+
+# rescaling
 d <- rescale_and_average(d, hazard_names, "hazard")
 d <- rescale_and_average(d, vulnerability_names, "vulnerability")
 d <- rescale_and_average(d, exposure_names, "exposure")
 
 # maps
+
+# add  rabies -  
+#geom_sf(aes(color = RABIES_CASES_HUMAN_INFECTION), color = 'snow3', fill = NA, size = 0.3)
+
+d_rabies <- d %>%
+    filter(!is.na(RABIES_CASES_HUMAN_INFECTION) & RABIES_CASES_HUMAN_INFECTION > 0)
+
 map_hazard <- ggplot(d) +
-    geom_sf(aes(fill = hazard_average),  color = 'gray20', size = 0.02) +
-    #scale_fill_viridis_c(name = "Hazard", option = "inferno") +
+    geom_sf(aes(fill = hazard_average), color = NA) + 
     scale_fill_gradient(name = "Hazard", high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
+    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     ggtitle("Rescaled Hazard Average") +
     theme_minimal()
 
-map_hazard
+#map_hazard
 
 map_vulnerability <- ggplot(d) +
-    geom_sf(aes(fill = vulnerability_average),  color = 'gray20', size = 0.02) +
+    geom_sf(aes(fill = vulnerability_average),  color = NA ) + #'gray20', size = 0.02
     scale_fill_distiller(name = "Vulnerability", palette = "Spectral") +
+    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     #scale_fill_gradient(high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
     ggtitle("Rescaled Vulnerability Average") +
     theme_minimal()
 
-map_vulnerability
+#map_vulnerability
 
 map_exposure <- ggplot(d) +
-    geom_sf(aes(fill = exposure_average), color = 'gray20', size = 0.02) +
+    geom_sf(aes(fill = exposure_average), color = NA ) +
     scale_fill_viridis_c(name = "Exposure", option = "viridis") +
+    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     ggtitle("Rescaled Exposure Average") +
     theme_minimal()
 
-map_exposure
+#map_exposure
 
 # all
 library(ggpubr)
 setwd(here())
 setwd('99_manuscript')
 # width = 22, height = 30
-jpeg(filename = "rabies_risk_components_wide.jpg", width = 30, height = 22, units = "cm", res = 400)
+jpeg(filename = "rabies_risk_components_wide.jpg", width = 33, height = 23, units = "cm", res = 400)
 ggarrange(
     map_hazard,
     map_vulnerability,
@@ -84,7 +169,7 @@ ggarrange(
 )
 dev.off()
 
-jpeg(filename = "rabies_risk_components_long.jpg", width = 22, height = 30, units = "cm", res = 400)
+jpeg(filename = "rabies_risk_components_long.jpg", width = 23, height = 30, units = "cm", res = 400)
 ggarrange(
     map_hazard,
     map_vulnerability,
@@ -96,7 +181,6 @@ ggarrange(
 dev.off()
 
 
-
 # historic risk 
 top5_labels <- d %>%
     filter(!is.na(RABIES_CASES_HUMAN_INFECTION)) %>%
@@ -105,8 +189,7 @@ top5_labels <- d %>%
 top5_labels_coords <- st_centroid(top5_labels) %>%
     cbind(st_coordinates(.))  # adds X and Y columns
 
-map_historic_risk <- ggplot(d) +
-    geom_sf(aes(fill = RABIES_CASES_HUMAN_INFECTION)) +
+map_historic_risk <- ggplot(d) +  geom_sf(aes(fill = RABIES_CASES_HUMAN_INFECTION), color = NA ) +
     ggrepel::geom_text_repel(
         data = top5_labels_coords,
         aes(x = X, y = Y, label = paste0(NM_MUN, "\n(", RABIES_CASES_HUMAN_INFECTION, ")")),
@@ -120,8 +203,7 @@ map_historic_risk <- ggplot(d) +
         name = "Human rabies cases",
         option = "magma",
         na.value = "white"
-    ) +
-    labs(      title = "Rabies Historical Risk",
+    ) +     labs(      title = "Rabies Historical Risk",
         fill = "Human rabies cases" ) +
     ggtitle("Rabies Historic Risk") +
     theme_minimal()
