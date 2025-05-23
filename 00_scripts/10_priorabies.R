@@ -49,13 +49,17 @@ plot(d$SPENDING_EPIDEMIO_SURV ~  d$PTota)
 plot(d$SPENDING_HEALTH~  d$PTota)
 
 d$HAB_KM2
+
 ggplot(d, aes(x = HAB_KM2, y = SPENDING_HEALTH, 
               size = RABIES_CASES_HUMAN_INFECTION, 
               color = RABIES_CASES_HUMAN_INFECTION)) +
     geom_point(alpha = 0.7) +
+    scale_x_log10() +
+    scale_y_log10() +
     scale_size_continuous(range = c(2, 10)) +
     scale_color_gradient(low = "skyblue", high = "firebrick") +
-    labs(x = "People / sq km", y = "Spending on Health", 
+    labs(x = "People / sq km (log10)", 
+         y = "Spending on Health (log10)", 
          size = "Human Rabies Cases", 
          color = "Human Rabies Cases") +
     theme_minimal()
@@ -65,26 +69,29 @@ ggplot(d, aes(x = HAB_KM2, y = SPENDING_BASIC_CARE,
               size = RABIES_CASES_HUMAN_INFECTION, 
               color = RABIES_CASES_HUMAN_INFECTION)) +
     geom_point(alpha = 0.7) +
+    scale_x_log10() +
     scale_size_continuous(range = c(2, 10)) +
-    scale_color_gradient(low = "skyblue", high = "firebrick") +
-    labs(x = "People / sq km", y = "Spending on Basic Care", 
+        scale_color_gradient(low = "skyblue", high = "firebrick") +
+    labs(x = "People / sq km (log10)", y = "Spending on Basic Care (%)", 
          size = "Human Rabies Cases", 
          color = "Human Rabies Cases") +
     theme_minimal()
 
+max(d$SPENDING_EPIDEMIO_SURV, na.rm = T)
 
 ggplot(d, aes(x = HAB_KM2, y = SPENDING_EPIDEMIO_SURV, 
               size = RABIES_CASES_HUMAN_INFECTION, 
               color = RABIES_CASES_HUMAN_INFECTION)) +
     geom_point(alpha = 0.7) +
     scale_size_continuous(range = c(2, 10)) +
+    scale_x_log10() +
     scale_color_gradient(low = "skyblue", high = "firebrick") +
-    labs(x = "People / sq km", y = "Spending on Epidemiological Surveillance", 
+    labs(x = "People / sq km", y = "Spending on Epidemiological Surveillance (%)", 
          size = "Human Rabies Cases", 
          color = "Human Rabies Cases") +
     theme_minimal()
 
-
+# comparison
 d <- d %>%
     mutate(RabiesKnown = ifelse(!is.na(RABIES_CASES_HUMAN_INFECTION), "Rabies confirmed", "Unknown"))
 

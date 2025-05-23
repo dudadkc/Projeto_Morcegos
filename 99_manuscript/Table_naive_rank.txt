@@ -1,0 +1,646 @@
+NM_MUN	NM_UF	type
+Viseu	Pará	Rabies-positive and highly ranked in Naive ranking
+Barcelos	Amazonas	Rabies-positive and highly ranked in Naive ranking
+Itupiranga	Pará	Rabies-positive and highly ranked in Naive ranking
+Alcântara	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Arame	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Humberto de Campos	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Jenipapo dos Vieiras	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Lago da Pedra	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Penalva	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Pindaré-Mirim	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Santa Luzia	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Vitorino Freire	Maranhão	Rabies-positive and highly ranked in Naive ranking
+Camocim	Ceará	Rabies-positive and highly ranked in Naive ranking
+Jati	Ceará	Rabies-positive and highly ranked in Naive ranking
+Itabaiana	Sergipe	Rabies-positive and highly ranked in Naive ranking
+Salvador	Bahia	Rabies-positive and highly ranked in Naive ranking
+São Paulo	São Paulo	Rabies-positive and highly ranked in Naive ranking
+Corumbá	Mato Grosso do Sul	Rabies-positive and highly ranked in Naive ranking
+Brasília	Distrito Federal	Rabies-positive and highly ranked in Naive ranking
+Turiaçu	Maranhão	Rabies-positive and not ranked in Naive ranking
+Portel	Pará	Rabies-positive and not ranked in Naive ranking
+Augusto Corrêa	Pará	Rabies-positive and not ranked in Naive ranking
+Melgaço	Pará	Rabies-positive and not ranked in Naive ranking
+Bertópolis	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Carutapera	Maranhão	Rabies-positive and not ranked in Naive ranking
+Cândido Mendes	Maranhão	Rabies-positive and not ranked in Naive ranking
+Godofredo Viana	Maranhão	Rabies-positive and not ranked in Naive ranking
+São José de Ribamar	Maranhão	Rabies-positive and not ranked in Naive ranking
+São Luís	Maranhão	Rabies-positive and not ranked in Naive ranking
+Pimenta Bueno	Rondônia	Rabies-positive and not ranked in Naive ranking
+Xapuri	Acre	Rabies-positive and not ranked in Naive ranking
+Boa Vista	Roraima	Rabies-positive and not ranked in Naive ranking
+Floresta do Araguaia	Pará	Rabies-positive and not ranked in Naive ranking
+Alvorada	Tocantins	Rabies-positive and not ranked in Naive ranking
+Ponte Alta do Tocantins	Tocantins	Rabies-positive and not ranked in Naive ranking
+Axixá	Maranhão	Rabies-positive and not ranked in Naive ranking
+Barra do Corda	Maranhão	Rabies-positive and not ranked in Naive ranking
+Chapadinha	Maranhão	Rabies-positive and not ranked in Naive ranking
+Mirinzal	Maranhão	Rabies-positive and not ranked in Naive ranking
+Paço do Lumiar	Maranhão	Rabies-positive and not ranked in Naive ranking
+Presidente Juscelino	Maranhão	Rabies-positive and not ranked in Naive ranking
+Timbiras	Maranhão	Rabies-positive and not ranked in Naive ranking
+Parnaíba	Piauí	Rabies-positive and not ranked in Naive ranking
+Pio IX	Piauí	Rabies-positive and not ranked in Naive ranking
+Piripiri	Piauí	Rabies-positive and not ranked in Naive ranking
+Cariús	Ceará	Rabies-positive and not ranked in Naive ranking
+Chaval	Ceará	Rabies-positive and not ranked in Naive ranking
+Ipu	Ceará	Rabies-positive and not ranked in Naive ranking
+Iracema	Ceará	Rabies-positive and not ranked in Naive ranking
+São Luís do Curu	Ceará	Rabies-positive and not ranked in Naive ranking
+Frutuoso Gomes	Rio Grande do Norte	Rabies-positive and not ranked in Naive ranking
+Jacaraú	Paraíba	Rabies-positive and not ranked in Naive ranking
+Riacho dos Cavalos	Paraíba	Rabies-positive and not ranked in Naive ranking
+Floresta	Pernambuco	Rabies-positive and not ranked in Naive ranking
+Lagoa dos Gatos	Pernambuco	Rabies-positive and not ranked in Naive ranking
+Recife	Pernambuco	Rabies-positive and not ranked in Naive ranking
+Marechal Deodoro	Alagoas	Rabies-positive and not ranked in Naive ranking
+Mata Grande	Alagoas	Rabies-positive and not ranked in Naive ranking
+Murici	Alagoas	Rabies-positive and not ranked in Naive ranking
+Porto de Pedras	Alagoas	Rabies-positive and not ranked in Naive ranking
+Nossa Senhora do Socorro	Sergipe	Rabies-positive and not ranked in Naive ranking
+Dias d'Ávila	Bahia	Rabies-positive and not ranked in Naive ranking
+Itororó	Bahia	Rabies-positive and not ranked in Naive ranking
+Mata de São João	Bahia	Rabies-positive and not ranked in Naive ranking
+Paramirim	Bahia	Rabies-positive and not ranked in Naive ranking
+Carbonita	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Corinto	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Grão Mogol	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Mantena	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Prados	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Rio Casca	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Serra Azul de Minas	Minas Gerais	Rabies-positive and not ranked in Naive ranking
+Laranja da Terra	Espírito Santo	Rabies-positive and not ranked in Naive ranking
+Angra dos Reis	Rio de Janeiro	Rabies-positive and not ranked in Naive ranking
+São José do Vale do Rio Preto	Rio de Janeiro	Rabies-positive and not ranked in Naive ranking
+Ubatuba	São Paulo	Rabies-positive and not ranked in Naive ranking
+Gravatal	Santa Catarina	Rabies-positive and not ranked in Naive ranking
+Tapurah	Mato Grosso	Rabies-positive and not ranked in Naive ranking
+Minaçu	Goiás	Rabies-positive and not ranked in Naive ranking
+São Domingos	Goiás	Rabies-positive and not ranked in Naive ranking
+São Gabriel da Cachoeira	Amazonas	Rabies-unknown and ranked in Naive ranking
+Lagoa Grande do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+São João do Arraial	Piauí	Rabies-unknown and ranked in Naive ranking
+Porto Real do Colégio	Alagoas	Rabies-unknown and ranked in Naive ranking
+Santa Cruz de Minas	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+São João de Meriti	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Águas de São Pedro	São Paulo	Rabies-unknown and ranked in Naive ranking
+Carapicuíba	São Paulo	Rabies-unknown and ranked in Naive ranking
+Diadema	São Paulo	Rabies-unknown and ranked in Naive ranking
+Jandira	São Paulo	Rabies-unknown and ranked in Naive ranking
+Osasco	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Caetano do Sul	São Paulo	Rabies-unknown and ranked in Naive ranking
+Taboão da Serra	São Paulo	Rabies-unknown and ranked in Naive ranking
+Jaru	Rondônia	Rabies-unknown and ranked in Naive ranking
+Porto Velho	Rondônia	Rabies-unknown and ranked in Naive ranking
+Presidente Médici	Rondônia	Rabies-unknown and ranked in Naive ranking
+Urupá	Rondônia	Rabies-unknown and ranked in Naive ranking
+Vale do Paraíso	Rondônia	Rabies-unknown and ranked in Naive ranking
+Feijó	Acre	Rabies-unknown and ranked in Naive ranking
+Jordão	Acre	Rabies-unknown and ranked in Naive ranking
+Mâncio Lima	Acre	Rabies-unknown and ranked in Naive ranking
+Manoel Urbano	Acre	Rabies-unknown and ranked in Naive ranking
+Marechal Thaumaturgo	Acre	Rabies-unknown and ranked in Naive ranking
+Porto Walter	Acre	Rabies-unknown and ranked in Naive ranking
+Rodrigues Alves	Acre	Rabies-unknown and ranked in Naive ranking
+Santa Rosa do Purus	Acre	Rabies-unknown and ranked in Naive ranking
+Tarauacá	Acre	Rabies-unknown and ranked in Naive ranking
+Alvarães	Amazonas	Rabies-unknown and ranked in Naive ranking
+Anori	Amazonas	Rabies-unknown and ranked in Naive ranking
+Boca do Acre	Amazonas	Rabies-unknown and ranked in Naive ranking
+Carauari	Amazonas	Rabies-unknown and ranked in Naive ranking
+Careiro	Amazonas	Rabies-unknown and ranked in Naive ranking
+Coari	Amazonas	Rabies-unknown and ranked in Naive ranking
+Eirunepé	Amazonas	Rabies-unknown and ranked in Naive ranking
+Envira	Amazonas	Rabies-unknown and ranked in Naive ranking
+Fonte Boa	Amazonas	Rabies-unknown and ranked in Naive ranking
+Guajará	Amazonas	Rabies-unknown and ranked in Naive ranking
+Itamarati	Amazonas	Rabies-unknown and ranked in Naive ranking
+Japurá	Amazonas	Rabies-unknown and ranked in Naive ranking
+Juruá	Amazonas	Rabies-unknown and ranked in Naive ranking
+Jutaí	Amazonas	Rabies-unknown and ranked in Naive ranking
+Lábrea	Amazonas	Rabies-unknown and ranked in Naive ranking
+Manaus	Amazonas	Rabies-unknown and ranked in Naive ranking
+Maraã	Amazonas	Rabies-unknown and ranked in Naive ranking
+Nhamundá	Amazonas	Rabies-unknown and ranked in Naive ranking
+Nova Olinda do Norte	Amazonas	Rabies-unknown and ranked in Naive ranking
+Novo Airão	Amazonas	Rabies-unknown and ranked in Naive ranking
+Pauini	Amazonas	Rabies-unknown and ranked in Naive ranking
+Santa Isabel do Rio Negro	Amazonas	Rabies-unknown and ranked in Naive ranking
+Santo Antônio do Içá	Amazonas	Rabies-unknown and ranked in Naive ranking
+São Paulo de Olivença	Amazonas	Rabies-unknown and ranked in Naive ranking
+Tapauá	Amazonas	Rabies-unknown and ranked in Naive ranking
+Uarini	Amazonas	Rabies-unknown and ranked in Naive ranking
+Amajari	Roraima	Rabies-unknown and ranked in Naive ranking
+Alto Alegre	Roraima	Rabies-unknown and ranked in Naive ranking
+Uiramutã	Roraima	Rabies-unknown and ranked in Naive ranking
+Afuá	Pará	Rabies-unknown and ranked in Naive ranking
+Anajás	Pará	Rabies-unknown and ranked in Naive ranking
+Aurora do Pará	Pará	Rabies-unknown and ranked in Naive ranking
+Bagre	Pará	Rabies-unknown and ranked in Naive ranking
+Bonito	Pará	Rabies-unknown and ranked in Naive ranking
+Bragança	Pará	Rabies-unknown and ranked in Naive ranking
+Cachoeira do Piriá	Pará	Rabies-unknown and ranked in Naive ranking
+Capanema	Pará	Rabies-unknown and ranked in Naive ranking
+Capitão Poço	Pará	Rabies-unknown and ranked in Naive ranking
+Castanhal	Pará	Rabies-unknown and ranked in Naive ranking
+Eldorado do Carajás	Pará	Rabies-unknown and ranked in Naive ranking
+Garrafão do Norte	Pará	Rabies-unknown and ranked in Naive ranking
+Gurupá	Pará	Rabies-unknown and ranked in Naive ranking
+Igarapé-Açu	Pará	Rabies-unknown and ranked in Naive ranking
+Irituia	Pará	Rabies-unknown and ranked in Naive ranking
+Limoeiro do Ajuru	Pará	Rabies-unknown and ranked in Naive ranking
+Mãe do Rio	Pará	Rabies-unknown and ranked in Naive ranking
+Maracanã	Pará	Rabies-unknown and ranked in Naive ranking
+Nova Timboteua	Pará	Rabies-unknown and ranked in Naive ranking
+Novo Repartimento	Pará	Rabies-unknown and ranked in Naive ranking
+Óbidos	Pará	Rabies-unknown and ranked in Naive ranking
+Oriximiná	Pará	Rabies-unknown and ranked in Naive ranking
+Ourém	Pará	Rabies-unknown and ranked in Naive ranking
+Pacajá	Pará	Rabies-unknown and ranked in Naive ranking
+Peixe-Boi	Pará	Rabies-unknown and ranked in Naive ranking
+Piçarra	Pará	Rabies-unknown and ranked in Naive ranking
+Primavera	Pará	Rabies-unknown and ranked in Naive ranking
+Quatipuru	Pará	Rabies-unknown and ranked in Naive ranking
+Santa Maria do Pará	Pará	Rabies-unknown and ranked in Naive ranking
+Santarém	Pará	Rabies-unknown and ranked in Naive ranking
+Santarém Novo	Pará	Rabies-unknown and ranked in Naive ranking
+São Domingos do Capim	Pará	Rabies-unknown and ranked in Naive ranking
+São Félix do Xingu	Pará	Rabies-unknown and ranked in Naive ranking
+São Francisco do Pará	Pará	Rabies-unknown and ranked in Naive ranking
+São João do Araguaia	Pará	Rabies-unknown and ranked in Naive ranking
+São Miguel do Guamá	Pará	Rabies-unknown and ranked in Naive ranking
+Terra Alta	Pará	Rabies-unknown and ranked in Naive ranking
+Tracuateua	Pará	Rabies-unknown and ranked in Naive ranking
+Tucumã	Pará	Rabies-unknown and ranked in Naive ranking
+Ulianópolis	Pará	Rabies-unknown and ranked in Naive ranking
+Xinguara	Pará	Rabies-unknown and ranked in Naive ranking
+Serra do Navio	Amapá	Rabies-unknown and ranked in Naive ranking
+Calçoene	Amapá	Rabies-unknown and ranked in Naive ranking
+Cutias	Amapá	Rabies-unknown and ranked in Naive ranking
+Itaubal	Amapá	Rabies-unknown and ranked in Naive ranking
+Laranjal do Jari	Amapá	Rabies-unknown and ranked in Naive ranking
+Mazagão	Amapá	Rabies-unknown and ranked in Naive ranking
+Oiapoque	Amapá	Rabies-unknown and ranked in Naive ranking
+Pracuúba	Amapá	Rabies-unknown and ranked in Naive ranking
+Tartarugalzinho	Amapá	Rabies-unknown and ranked in Naive ranking
+Augustinópolis	Tocantins	Rabies-unknown and ranked in Naive ranking
+Bandeirantes do Tocantins	Tocantins	Rabies-unknown and ranked in Naive ranking
+Buriti do Tocantins	Tocantins	Rabies-unknown and ranked in Naive ranking
+Carrasco Bonito	Tocantins	Rabies-unknown and ranked in Naive ranking
+Esperantina	Tocantins	Rabies-unknown and ranked in Naive ranking
+Praia Norte	Tocantins	Rabies-unknown and ranked in Naive ranking
+Recursolândia	Tocantins	Rabies-unknown and ranked in Naive ranking
+Riachinho	Tocantins	Rabies-unknown and ranked in Naive ranking
+São Miguel do Tocantins	Tocantins	Rabies-unknown and ranked in Naive ranking
+Sítio Novo do Tocantins	Tocantins	Rabies-unknown and ranked in Naive ranking
+Altamira do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Alto Alegre do Pindaré	Maranhão	Rabies-unknown and ranked in Naive ranking
+Amapá do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Amarante do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Anapurus	Maranhão	Rabies-unknown and ranked in Naive ranking
+Araguanã	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bacabal	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bela Vista do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bequimão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bernardo do Mearim	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bom Jardim	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bom Jesus das Selvas	Maranhão	Rabies-unknown and ranked in Naive ranking
+Bom Lugar	Maranhão	Rabies-unknown and ranked in Naive ranking
+Brejo de Areia	Maranhão	Rabies-unknown and ranked in Naive ranking
+Buriti Bravo	Maranhão	Rabies-unknown and ranked in Naive ranking
+Buriticupu	Maranhão	Rabies-unknown and ranked in Naive ranking
+Buritirana	Maranhão	Rabies-unknown and ranked in Naive ranking
+Cajari	Maranhão	Rabies-unknown and ranked in Naive ranking
+Cantanhede	Maranhão	Rabies-unknown and ranked in Naive ranking
+Central do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Centro do Guilherme	Maranhão	Rabies-unknown and ranked in Naive ranking
+Cidelândia	Maranhão	Rabies-unknown and ranked in Naive ranking
+Dom Pedro	Maranhão	Rabies-unknown and ranked in Naive ranking
+Esperantinópolis	Maranhão	Rabies-unknown and ranked in Naive ranking
+Formosa da Serra Negra	Maranhão	Rabies-unknown and ranked in Naive ranking
+Gonçalves Dias	Maranhão	Rabies-unknown and ranked in Naive ranking
+Governador Newton Bello	Maranhão	Rabies-unknown and ranked in Naive ranking
+Governador Nunes Freire	Maranhão	Rabies-unknown and ranked in Naive ranking
+Icatu	Maranhão	Rabies-unknown and ranked in Naive ranking
+Igarapé Grande	Maranhão	Rabies-unknown and ranked in Naive ranking
+Itaipava do Grajaú	Maranhão	Rabies-unknown and ranked in Naive ranking
+João Lisboa	Maranhão	Rabies-unknown and ranked in Naive ranking
+Junco do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Lago do Junco	Maranhão	Rabies-unknown and ranked in Naive ranking
+Lago Verde	Maranhão	Rabies-unknown and ranked in Naive ranking
+Lago dos Rodrigues	Maranhão	Rabies-unknown and ranked in Naive ranking
+Marajá do Sena	Maranhão	Rabies-unknown and ranked in Naive ranking
+Maranhãozinho	Maranhão	Rabies-unknown and ranked in Naive ranking
+Matinha	Maranhão	Rabies-unknown and ranked in Naive ranking
+Matões do Norte	Maranhão	Rabies-unknown and ranked in Naive ranking
+Monção	Maranhão	Rabies-unknown and ranked in Naive ranking
+Olho d'Água das Cunhãs	Maranhão	Rabies-unknown and ranked in Naive ranking
+Olinda Nova do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Parnarama	Maranhão	Rabies-unknown and ranked in Naive ranking
+Paulino Neves	Maranhão	Rabies-unknown and ranked in Naive ranking
+Paulo Ramos	Maranhão	Rabies-unknown and ranked in Naive ranking
+Pedro do Rosário	Maranhão	Rabies-unknown and ranked in Naive ranking
+Poção de Pedras	Maranhão	Rabies-unknown and ranked in Naive ranking
+Presidente Dutra	Maranhão	Rabies-unknown and ranked in Naive ranking
+Presidente Médici	Maranhão	Rabies-unknown and ranked in Naive ranking
+Presidente Sarney	Maranhão	Rabies-unknown and ranked in Naive ranking
+Santa Helena	Maranhão	Rabies-unknown and ranked in Naive ranking
+Santa Inês	Maranhão	Rabies-unknown and ranked in Naive ranking
+Santa Luzia do Paruá	Maranhão	Rabies-unknown and ranked in Naive ranking
+Santo Antônio dos Lopes	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Domingos do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Francisco do Brejão	Maranhão	Rabies-unknown and ranked in Naive ranking
+São João do Carú	Maranhão	Rabies-unknown and ranked in Naive ranking
+São João do Soter	Maranhão	Rabies-unknown and ranked in Naive ranking
+São José dos Basílios	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Luís Gonzaga do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Mateus do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Raimundo do Doca Bezerra	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Roberto	Maranhão	Rabies-unknown and ranked in Naive ranking
+São Vicente Ferrer	Maranhão	Rabies-unknown and ranked in Naive ranking
+Satubinha	Maranhão	Rabies-unknown and ranked in Naive ranking
+Senador La Rocque	Maranhão	Rabies-unknown and ranked in Naive ranking
+Serrano do Maranhão	Maranhão	Rabies-unknown and ranked in Naive ranking
+Tufilândia	Maranhão	Rabies-unknown and ranked in Naive ranking
+Turilândia	Maranhão	Rabies-unknown and ranked in Naive ranking
+Tutóia	Maranhão	Rabies-unknown and ranked in Naive ranking
+Vila Nova dos Martírios	Maranhão	Rabies-unknown and ranked in Naive ranking
+Zé Doca	Maranhão	Rabies-unknown and ranked in Naive ranking
+Alagoinha do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Alvorada do Gurguéia	Piauí	Rabies-unknown and ranked in Naive ranking
+Angical do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Aroeiras do Itaim	Piauí	Rabies-unknown and ranked in Naive ranking
+Assunção do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Barras	Piauí	Rabies-unknown and ranked in Naive ranking
+Belém do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Beneditinos	Piauí	Rabies-unknown and ranked in Naive ranking
+Boa Hora	Piauí	Rabies-unknown and ranked in Naive ranking
+Bom Jesus	Piauí	Rabies-unknown and ranked in Naive ranking
+Buriti dos Lopes	Piauí	Rabies-unknown and ranked in Naive ranking
+Cajazeiras do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Campo Alegre do Fidalgo	Piauí	Rabies-unknown and ranked in Naive ranking
+Campo Largo do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Canto do Buriti	Piauí	Rabies-unknown and ranked in Naive ranking
+Caracol	Piauí	Rabies-unknown and ranked in Naive ranking
+Caraúbas do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Caxingó	Piauí	Rabies-unknown and ranked in Naive ranking
+Cocal	Piauí	Rabies-unknown and ranked in Naive ranking
+Cristalândia do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Cristino Castro	Piauí	Rabies-unknown and ranked in Naive ranking
+Curral Novo do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Esperantina	Piauí	Rabies-unknown and ranked in Naive ranking
+Flores do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Floresta do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Francinópolis	Piauí	Rabies-unknown and ranked in Naive ranking
+Fronteiras	Piauí	Rabies-unknown and ranked in Naive ranking
+Gilbués	Piauí	Rabies-unknown and ranked in Naive ranking
+Isaías Coelho	Piauí	Rabies-unknown and ranked in Naive ranking
+Jacobina do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Joaquim Pires	Piauí	Rabies-unknown and ranked in Naive ranking
+Juazeiro do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Lagoa do Sítio	Piauí	Rabies-unknown and ranked in Naive ranking
+Massapê do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Miguel Alves	Piauí	Rabies-unknown and ranked in Naive ranking
+Murici dos Portelas	Piauí	Rabies-unknown and ranked in Naive ranking
+Nossa Senhora de Nazaré	Piauí	Rabies-unknown and ranked in Naive ranking
+Oeiras	Piauí	Rabies-unknown and ranked in Naive ranking
+Padre Marcos	Piauí	Rabies-unknown and ranked in Naive ranking
+Paquetá	Piauí	Rabies-unknown and ranked in Naive ranking
+Patos do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Pavussu	Piauí	Rabies-unknown and ranked in Naive ranking
+Nova Santa Rita	Piauí	Rabies-unknown and ranked in Naive ranking
+Porto	Piauí	Rabies-unknown and ranked in Naive ranking
+Redenção do Gurguéia	Piauí	Rabies-unknown and ranked in Naive ranking
+Regeneração	Piauí	Rabies-unknown and ranked in Naive ranking
+Ribeiro Gonçalves	Piauí	Rabies-unknown and ranked in Naive ranking
+Santa Rosa do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+São Francisco de Assis do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+São Gonçalo do Gurguéia	Piauí	Rabies-unknown and ranked in Naive ranking
+São João da Fronteira	Piauí	Rabies-unknown and ranked in Naive ranking
+São João da Serra	Piauí	Rabies-unknown and ranked in Naive ranking
+São João do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+São José do Peixe	Piauí	Rabies-unknown and ranked in Naive ranking
+São Luis do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+São Miguel do Tapuio	Piauí	Rabies-unknown and ranked in Naive ranking
+São Pedro do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Sigefredo Pacheco	Piauí	Rabies-unknown and ranked in Naive ranking
+Tamboril do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Valença do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Vila Nova do Piauí	Piauí	Rabies-unknown and ranked in Naive ranking
+Wall Ferraz	Piauí	Rabies-unknown and ranked in Naive ranking
+Alcântaras	Ceará	Rabies-unknown and ranked in Naive ranking
+Fortaleza	Ceará	Rabies-unknown and ranked in Naive ranking
+Meruoca	Ceará	Rabies-unknown and ranked in Naive ranking
+Nova Olinda	Ceará	Rabies-unknown and ranked in Naive ranking
+Reriutaba	Ceará	Rabies-unknown and ranked in Naive ranking
+Saboeiro	Ceará	Rabies-unknown and ranked in Naive ranking
+Campo Grande	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Bodó	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Carnaubais	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Coronel Ezequiel	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Fernando Pedroza	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+José da Penha	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Passa e Fica	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Tibau do Sul	Rio Grande do Norte	Rabies-unknown and ranked in Naive ranking
+Aguiar	Paraíba	Rabies-unknown and ranked in Naive ranking
+Belém	Paraíba	Rabies-unknown and ranked in Naive ranking
+Bernardino Batista	Paraíba	Rabies-unknown and ranked in Naive ranking
+Cabedelo	Paraíba	Rabies-unknown and ranked in Naive ranking
+Cacimba de Dentro	Paraíba	Rabies-unknown and ranked in Naive ranking
+Caldas Brandão	Paraíba	Rabies-unknown and ranked in Naive ranking
+Casserengue	Paraíba	Rabies-unknown and ranked in Naive ranking
+Cuitegi	Paraíba	Rabies-unknown and ranked in Naive ranking
+Curral de Cima	Paraíba	Rabies-unknown and ranked in Naive ranking
+Gurinhém	Paraíba	Rabies-unknown and ranked in Naive ranking
+Junco do Seridó	Paraíba	Rabies-unknown and ranked in Naive ranking
+Logradouro	Paraíba	Rabies-unknown and ranked in Naive ranking
+Lucena	Paraíba	Rabies-unknown and ranked in Naive ranking
+Nazarezinho	Paraíba	Rabies-unknown and ranked in Naive ranking
+Pilões	Paraíba	Rabies-unknown and ranked in Naive ranking
+Pilõezinhos	Paraíba	Rabies-unknown and ranked in Naive ranking
+Riachão do Poço	Paraíba	Rabies-unknown and ranked in Naive ranking
+Rio Tinto	Paraíba	Rabies-unknown and ranked in Naive ranking
+Santana dos Garrotes	Paraíba	Rabies-unknown and ranked in Naive ranking
+São Francisco	Paraíba	Rabies-unknown and ranked in Naive ranking
+São José dos Ramos	Paraíba	Rabies-unknown and ranked in Naive ranking
+Triunfo	Paraíba	Rabies-unknown and ranked in Naive ranking
+Cedro	Pernambuco	Rabies-unknown and ranked in Naive ranking
+Itaíba	Pernambuco	Rabies-unknown and ranked in Naive ranking
+Pombos	Pernambuco	Rabies-unknown and ranked in Naive ranking
+São Benedito do Sul	Pernambuco	Rabies-unknown and ranked in Naive ranking
+Moreilândia	Pernambuco	Rabies-unknown and ranked in Naive ranking
+Tupanatinga	Pernambuco	Rabies-unknown and ranked in Naive ranking
+Belo Monte	Alagoas	Rabies-unknown and ranked in Naive ranking
+Campo Grande	Alagoas	Rabies-unknown and ranked in Naive ranking
+Chã Preta	Alagoas	Rabies-unknown and ranked in Naive ranking
+Estrela de Alagoas	Alagoas	Rabies-unknown and ranked in Naive ranking
+Feliz Deserto	Alagoas	Rabies-unknown and ranked in Naive ranking
+Girau do Ponciano	Alagoas	Rabies-unknown and ranked in Naive ranking
+Igaci	Alagoas	Rabies-unknown and ranked in Naive ranking
+Igreja Nova	Alagoas	Rabies-unknown and ranked in Naive ranking
+Maravilha	Alagoas	Rabies-unknown and ranked in Naive ranking
+Olho d'Água Grande	Alagoas	Rabies-unknown and ranked in Naive ranking
+Piaçabuçu	Alagoas	Rabies-unknown and ranked in Naive ranking
+Pindoba	Alagoas	Rabies-unknown and ranked in Naive ranking
+Poço das Trincheiras	Alagoas	Rabies-unknown and ranked in Naive ranking
+Santana do Mundaú	Alagoas	Rabies-unknown and ranked in Naive ranking
+Taquarana	Alagoas	Rabies-unknown and ranked in Naive ranking
+Areia Branca	Sergipe	Rabies-unknown and ranked in Naive ranking
+Barra dos Coqueiros	Sergipe	Rabies-unknown and ranked in Naive ranking
+Boquim	Sergipe	Rabies-unknown and ranked in Naive ranking
+Cumbe	Sergipe	Rabies-unknown and ranked in Naive ranking
+Divina Pastora	Sergipe	Rabies-unknown and ranked in Naive ranking
+Itabaianinha	Sergipe	Rabies-unknown and ranked in Naive ranking
+Lagarto	Sergipe	Rabies-unknown and ranked in Naive ranking
+Laranjeiras	Sergipe	Rabies-unknown and ranked in Naive ranking
+Malhador	Sergipe	Rabies-unknown and ranked in Naive ranking
+Maruim	Sergipe	Rabies-unknown and ranked in Naive ranking
+Pedrinhas	Sergipe	Rabies-unknown and ranked in Naive ranking
+Poço Redondo	Sergipe	Rabies-unknown and ranked in Naive ranking
+Riachão do Dantas	Sergipe	Rabies-unknown and ranked in Naive ranking
+Riachuelo	Sergipe	Rabies-unknown and ranked in Naive ranking
+Rosário do Catete	Sergipe	Rabies-unknown and ranked in Naive ranking
+Salgado	Sergipe	Rabies-unknown and ranked in Naive ranking
+Santa Rosa de Lima	Sergipe	Rabies-unknown and ranked in Naive ranking
+Simão Dias	Sergipe	Rabies-unknown and ranked in Naive ranking
+Siriri	Sergipe	Rabies-unknown and ranked in Naive ranking
+Tomar do Geru	Sergipe	Rabies-unknown and ranked in Naive ranking
+Adustina	Bahia	Rabies-unknown and ranked in Naive ranking
+Aporá	Bahia	Rabies-unknown and ranked in Naive ranking
+Baianópolis	Bahia	Rabies-unknown and ranked in Naive ranking
+Caetanos	Bahia	Rabies-unknown and ranked in Naive ranking
+Candiba	Bahia	Rabies-unknown and ranked in Naive ranking
+Caraíbas	Bahia	Rabies-unknown and ranked in Naive ranking
+Catolândia	Bahia	Rabies-unknown and ranked in Naive ranking
+Conceição do Almeida	Bahia	Rabies-unknown and ranked in Naive ranking
+Cotegipe	Bahia	Rabies-unknown and ranked in Naive ranking
+Euclides da Cunha	Bahia	Rabies-unknown and ranked in Naive ranking
+Feira de Santana	Bahia	Rabies-unknown and ranked in Naive ranking
+Firmino Alves	Bahia	Rabies-unknown and ranked in Naive ranking
+Guanambi	Bahia	Rabies-unknown and ranked in Naive ranking
+Ipirá	Bahia	Rabies-unknown and ranked in Naive ranking
+Irará	Bahia	Rabies-unknown and ranked in Naive ranking
+Itamari	Bahia	Rabies-unknown and ranked in Naive ranking
+Itapé	Bahia	Rabies-unknown and ranked in Naive ranking
+Itapicuru	Bahia	Rabies-unknown and ranked in Naive ranking
+Itarantim	Bahia	Rabies-unknown and ranked in Naive ranking
+Ituaçu	Bahia	Rabies-unknown and ranked in Naive ranking
+Lafaiete Coutinho	Bahia	Rabies-unknown and ranked in Naive ranking
+Lamarão	Bahia	Rabies-unknown and ranked in Naive ranking
+Madre de Deus	Bahia	Rabies-unknown and ranked in Naive ranking
+Malhada	Bahia	Rabies-unknown and ranked in Naive ranking
+Manoel Vitorino	Bahia	Rabies-unknown and ranked in Naive ranking
+Maraú	Bahia	Rabies-unknown and ranked in Naive ranking
+Medeiros Neto	Bahia	Rabies-unknown and ranked in Naive ranking
+Mirante	Bahia	Rabies-unknown and ranked in Naive ranking
+Monte Santo	Bahia	Rabies-unknown and ranked in Naive ranking
+Nazaré	Bahia	Rabies-unknown and ranked in Naive ranking
+Nova Ibiá	Bahia	Rabies-unknown and ranked in Naive ranking
+Palmas de Monte Alto	Bahia	Rabies-unknown and ranked in Naive ranking
+Pé de Serra	Bahia	Rabies-unknown and ranked in Naive ranking
+Pedro Alexandre	Bahia	Rabies-unknown and ranked in Naive ranking
+Pilão Arcado	Bahia	Rabies-unknown and ranked in Naive ranking
+Queimadas	Bahia	Rabies-unknown and ranked in Naive ranking
+Quixabeira	Bahia	Rabies-unknown and ranked in Naive ranking
+Riachão do Jacuípe	Bahia	Rabies-unknown and ranked in Naive ranking
+Ribeira do Pombal	Bahia	Rabies-unknown and ranked in Naive ranking
+Salinas da Margarida	Bahia	Rabies-unknown and ranked in Naive ranking
+Santa Bárbara	Bahia	Rabies-unknown and ranked in Naive ranking
+Santanópolis	Bahia	Rabies-unknown and ranked in Naive ranking
+Serra Preta	Bahia	Rabies-unknown and ranked in Naive ranking
+Serrinha	Bahia	Rabies-unknown and ranked in Naive ranking
+Teofilândia	Bahia	Rabies-unknown and ranked in Naive ranking
+Tucano	Bahia	Rabies-unknown and ranked in Naive ranking
+Alpercata	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Bambuí	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Belmiro Braga	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Belo Horizonte	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Capetinga	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Chácara	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Fernandes Tourinho	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Fruta de Leite	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Matias Barbosa	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Pratápolis	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+São João do Oriente	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+São José do Divino	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Sobrália	Minas Gerais	Rabies-unknown and ranked in Naive ranking
+Ecoporanga	Espírito Santo	Rabies-unknown and ranked in Naive ranking
+Arraial do Cabo	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Bom Jardim	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Cambuci	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Cordeiro	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Macuco	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Nilópolis	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Quatis	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Trajano de Moraes	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Valença	Rio de Janeiro	Rabies-unknown and ranked in Naive ranking
+Alfredo Marcondes	São Paulo	Rabies-unknown and ranked in Naive ranking
+Apiaí	São Paulo	Rabies-unknown and ranked in Naive ranking
+Barra do Chapéu	São Paulo	Rabies-unknown and ranked in Naive ranking
+Barueri	São Paulo	Rabies-unknown and ranked in Naive ranking
+Bertioga	São Paulo	Rabies-unknown and ranked in Naive ranking
+Bom Sucesso de Itararé	São Paulo	Rabies-unknown and ranked in Naive ranking
+Cajati	São Paulo	Rabies-unknown and ranked in Naive ranking
+Campos do Jordão	São Paulo	Rabies-unknown and ranked in Naive ranking
+Cotia	São Paulo	Rabies-unknown and ranked in Naive ranking
+Cubatão	São Paulo	Rabies-unknown and ranked in Naive ranking
+Eldorado	São Paulo	Rabies-unknown and ranked in Naive ranking
+Embu das Artes	São Paulo	Rabies-unknown and ranked in Naive ranking
+Embu-Guaçu	São Paulo	Rabies-unknown and ranked in Naive ranking
+Guapiara	São Paulo	Rabies-unknown and ranked in Naive ranking
+Guarujá	São Paulo	Rabies-unknown and ranked in Naive ranking
+Guarulhos	São Paulo	Rabies-unknown and ranked in Naive ranking
+Hortolândia	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ilhabela	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ilha Comprida	São Paulo	Rabies-unknown and ranked in Naive ranking
+Iporanga	São Paulo	Rabies-unknown and ranked in Naive ranking
+Itaoca	São Paulo	Rabies-unknown and ranked in Naive ranking
+Itapecerica da Serra	São Paulo	Rabies-unknown and ranked in Naive ranking
+Itapevi	São Paulo	Rabies-unknown and ranked in Naive ranking
+Itapirapuã Paulista	São Paulo	Rabies-unknown and ranked in Naive ranking
+Juquitiba	São Paulo	Rabies-unknown and ranked in Naive ranking
+Mariápolis	São Paulo	Rabies-unknown and ranked in Naive ranking
+Mongaguá	São Paulo	Rabies-unknown and ranked in Naive ranking
+Nova Campina	São Paulo	Rabies-unknown and ranked in Naive ranking
+Palmeira d'Oeste	São Paulo	Rabies-unknown and ranked in Naive ranking
+Pirapora do Bom Jesus	São Paulo	Rabies-unknown and ranked in Naive ranking
+Praia Grande	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ribeira	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ribeirão Branco	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ribeirão Grande	São Paulo	Rabies-unknown and ranked in Naive ranking
+Ribeirão Pires	São Paulo	Rabies-unknown and ranked in Naive ranking
+Rio Grande da Serra	São Paulo	Rabies-unknown and ranked in Naive ranking
+Santo André	São Paulo	Rabies-unknown and ranked in Naive ranking
+Santos	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Bento do Sapucaí	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Bernardo do Campo	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Francisco	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Lourenço da Serra	São Paulo	Rabies-unknown and ranked in Naive ranking
+São Vicente	São Paulo	Rabies-unknown and ranked in Naive ranking
+Vargem Grande Paulista	São Paulo	Rabies-unknown and ranked in Naive ranking
+Adrianópolis	Paraná	Rabies-unknown and ranked in Naive ranking
+Almirante Tamandaré	Paraná	Rabies-unknown and ranked in Naive ranking
+Bocaiúva do Sul	Paraná	Rabies-unknown and ranked in Naive ranking
+Campo Largo	Paraná	Rabies-unknown and ranked in Naive ranking
+Campo Magro	Paraná	Rabies-unknown and ranked in Naive ranking
+Cerro Azul	Paraná	Rabies-unknown and ranked in Naive ranking
+Itaperuçu	Paraná	Rabies-unknown and ranked in Naive ranking
+Rio Branco do Sul	Paraná	Rabies-unknown and ranked in Naive ranking
+Doutor Ulysses	Paraná	Rabies-unknown and ranked in Naive ranking
+Agrolândia	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Agronômica	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Angelina	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Antônio Carlos	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Apiúna	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Arabutã	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Arvoredo	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Aurora	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Blumenau	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Botuverá	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Braço do Norte	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Braço do Trombudo	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Brusque	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Camboriú	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Chapadão do Lageado	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Concórdia	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Dona Emma	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Faxinal dos Guedes	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Gaspar	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Guabiruba	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Ilhota	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Indaial	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Itá	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Itajaí	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Ituporanga	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Laurentino	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Leoberto Leal	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Lontras	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Luiz Alves	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Major Gercino	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Nova Trento	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Paial	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Penha	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Pouso Redondo	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Presidente Getúlio	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Presidente Nereu	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Rancho Queimado	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Rio do Oeste	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Rio do Sul	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Rodeio	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+São José	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Siderópolis	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Trombudo Central	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Vidal Ramos	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Witmarsum	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Xaxim	Santa Catarina	Rabies-unknown and ranked in Naive ranking
+Anta Gorda	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Antônio Prado	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Arvorezinha	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Bento Gonçalves	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Camargo	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Canudos do Vale	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Cotiporã	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Dois Irmãos	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Dois Lajeados	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Doutor Ricardo	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Fagundes Varela	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Farroupilha	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Flores da Cunha	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Forquetinha	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Garibaldi	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Gramado	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Guaporé	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Igrejinha	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Ilópolis	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Ipê	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Itapuca	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Ivoti	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Lindolfo Collor	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Miraguaí	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Montauri	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Monte Belo do Sul	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Morro Reuter	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Muçum	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Alvorada	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Araçá	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Bassano	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Pádua	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Prata	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Nova Roma do Sul	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Paraí	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Pinhal Grande	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Pinto Bandeira	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Presidente Lucena	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Protásio Alves	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Santa Maria do Herval	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Santa Tereza	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+São Domingos do Sul	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+São Francisco de Paula	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+São Marcos	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+São Valentim do Sul	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+São Vendelino	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Sapiranga	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Serafina Corrêa	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Sério	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Três Coroas	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+União da Serra	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Vale Real	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Veranópolis	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Vespasiano Corrêa	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Vila Flores	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Vila Maria	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Vista Alegre do Prata	Rio Grande do Sul	Rabies-unknown and ranked in Naive ranking
+Bodoquena	Mato Grosso do Sul	Rabies-unknown and ranked in Naive ranking
+Bonito	Mato Grosso do Sul	Rabies-unknown and ranked in Naive ranking
+Paranhos	Mato Grosso do Sul	Rabies-unknown and ranked in Naive ranking
+Porto Murtinho	Mato Grosso do Sul	Rabies-unknown and ranked in Naive ranking
+Cáceres	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Campinápolis	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Jauru	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Vila Bela da Santíssima Trindade	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Nova Bandeirantes	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Nova Nazaré	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+São José dos Quatro Marcos	Mato Grosso	Rabies-unknown and ranked in Naive ranking
+Lagoa Santa	Goiás	Rabies-unknown and ranked in Naive ranking
