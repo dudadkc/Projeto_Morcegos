@@ -1,14 +1,21 @@
 #' ----
 #' aim: prioritization
 #' author: re
-#' date: May 2025
+#' date: Nov 2025
 #' ----
 
 library(tidyverse)
 library(sf)
 require(here)
-require(RColorBrewer)
-
+library(spdep)
+library(tidyr)
+library(ggplot2)
+library(ggrepel)
+library(ggspatial)
+library(sf)
+library(RColorBrewer)
+library(dplyr)
+library(VennDiagram)
 
 d <- st_read('C:/Users/rdel0062/Downloads/00_mun_data.gpkg')
 
@@ -117,13 +124,39 @@ ggplot(d, aes(x = RabiesKnown, y = SPENDING_EPIDEMIO_SURV, fill = RabiesKnown)) 
     theme_minimal()
 
 
-#
+# Updating historical risk
+
 d %>%     filter(
         RABIES_CASES_HUMAN_INFECTION > 0,
         RABIES_CASES_DOMESTIC_FELINE > 0,
         RABIES_CASES_DOMESTIC_CANINE > 0
     ) %>%  select(name_muni, RABIES_CASES_HUMAN_INFECTION, 
            RABIES_CASES_DOMESTIC_FELINE, RABIES_CASES_DOMESTIC_CANINE)
+
+# Mismatches
+human_cases <- d$RABIES_CASES_HUMAN_INFECTION > 0
+feline_cases <- d$RABIES_CASES_DOMESTIC_FELINE > 0
+canine_cases <- d$RABIES_CASES_DOMESTIC_CANINE > 0
+
+# Generate counts for Venn
+venn_counts <- list(
+    Human = which(human_cases),
+    Feline = which(feline_cases),
+    Canine = which(canine_cases)
+)
+
+# Plot Venn diagram
+venn.plot <- venn.diagram(
+    x = venn_counts,
+    filename = NULL,   # plots to R device, not file
+    fill = c("red", "green", "blue"),
+    alpha = 0.5,
+    cex = 1.5,
+    cat.cex = 1.2,
+    main = "Overlap of Rabies Cases"
+)
+
+grid.draw(venn.plot)
 
 
 # rescaling
@@ -191,12 +224,9 @@ dev.off()
 
 # Spatial prioritization ---------------------------------------------------
 
-library(spdep)
-
 colnames(d)
 
 
-library(tidyr)
 
 d_flagged <- d %>%
     mutate(
@@ -253,7 +283,6 @@ d$scale_index <- scales::rescale(d$Spatial_prioritization_index)
 summary(d$scale_index)
 
 
-#
 quantile(d$scale_index)[1]
 #     0%        25%        50%        75%       100% 
 
@@ -279,19 +308,6 @@ table(muni_sel$index_cat)
 sum(d$scale_index > 0.04151593, na.rm = TRUE)
 
 
-
-
-
-library(ggplot2)
-library(ggrepel)
-library(ggspatial)
-library(sf)
-library(RColorBrewer)
-library(dplyr)
-
-
-st_bbox(muni)
-
 reg <- geobr::read_region(year = 2020) %>% 
     sf::st_crop(xmin = -74, ymin = -34, xmax = -35, ymax = 5)
 reg
@@ -304,7 +320,7 @@ very_high_munis <- muni_sel %>%
 
 length(very_high_munis)
 
-
+# Sel
 
 muni_cidades <- muni_sel %>% 
     dplyr::filter(name_muni %in% very_high_munis)
@@ -471,7 +487,7 @@ ggarrange(
 dev.off()
 
 
-# historic risk 
+# historic risk - old eval - Human only 
 top5_labels <- d %>%
     filter(!is.na(RABIES_CASES_HUMAN_INFECTION)) %>%
     top_n(5, RABIES_CASES_HUMAN_INFECTION)
