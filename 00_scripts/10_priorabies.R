@@ -16,6 +16,9 @@ library(sf)
 library(RColorBrewer)
 library(dplyr)
 library(VennDiagram)
+library(pROC)
+library(nngeo)
+library(grid)
 
 d <- st_read('C:/Users/rdel0062/Downloads/00_mun_data.gpkg')
 
@@ -46,9 +49,32 @@ rescale_and_average <- function(data, var_names, prefix) {
 
 # Arranging the scale for positive expectations
 
+
+# For Imbe city ---------- no information for sdm so we will fill in with its closest neighbor (Novo Barreiro, suitabilty = 0.7)
+
+d %>% 
+    filter(is.na(sdm_cont_mn)) %>% 
+    select(name_muni) 
+
+na_rows <- which(is.na(d$sdm_cont_mn))
+
+for(i in na_rows){
+    nearest <- st_nn(d[i,], d %>% filter(!is.na(sdm_cont_mn)), k = 1, returnDist = FALSE)[[1]]
+    d$sdm_cont_mn[i] <- d$sdm_cont_mn[nearest]
+}
+
+d[nearest,'name_muni']
+d[na_rows, 'sdm_cont_mn']
+
+
 summary(d$CANINE_VACCINATED)
+summary(d$sdm_cont_mn)
+
 d$CANINE_VACCINATED <- d$CANINE_VACCINATED*(-1)
 summary(d$CANINE_VACCINATED)
+
+summary(d$CANINE_VACCINATED)
+cor(d$CANINE_VACCINATED, d$sdm_cont_mn)
 
 d$RT_LITE <- d$RT_LITE*(-1)
 
@@ -113,7 +139,7 @@ d %>%   mutate(RabiesKnown = ifelse(!is.na(RABIES_CASES_HUMAN_INFECTION), "Rabie
     )
 
 
-# Plot density histogram
+# Plot density histogram - Supplements
 ggplot(d, aes(x = RabiesKnown, y = SPENDING_EPIDEMIO_SURV, fill = RabiesKnown)) +
     geom_violin(trim = FALSE, alpha = 0.6) +
     #geom_boxplot(width = 0.1, outlier.shape = NA) +
@@ -124,8 +150,7 @@ ggplot(d, aes(x = RabiesKnown, y = SPENDING_EPIDEMIO_SURV, fill = RabiesKnown)) 
     theme_minimal()
 
 
-# Updating historical risk
-
+# historical risk
 d %>%     filter(
         RABIES_CASES_HUMAN_INFECTION > 0,
         RABIES_CASES_DOMESTIC_FELINE > 0,
@@ -138,47 +163,46 @@ human_cases <- d$RABIES_CASES_HUMAN_INFECTION > 0
 feline_cases <- d$RABIES_CASES_DOMESTIC_FELINE > 0
 canine_cases <- d$RABIES_CASES_DOMESTIC_CANINE > 0
 
-# Generate counts for Venn
-venn_counts <- list(
-    Human = which(human_cases),
-    Feline = which(feline_cases),
-    Canine = which(canine_cases)
-)
 
-# Plot Venn diagram
+png(filename = "venn_rabies_cases.png",
+    width = 2000,   # pixels
+    height = 2000,
+    res = 300       )
+
 venn.plot <- venn.diagram(
     x = venn_counts,
-    filename = NULL,   # plots to R device, not file
-    fill = c("red", "green", "blue"),
+    filename = NULL,
+    fill = c("#FF9999", "#99CC99", "#6699CC"),
     alpha = 0.5,
-    cex = 1.5,
-    cat.cex = 1.2,
-    main = "Overlap of Rabies Cases"
+    cex = 1.8,
+    fontface = "bold",
+    cat.cex = 1.4,
+    cat.fontface = "bold",
+    cat.pos = c(-20, 20, 180),
+    cat.dist = c(0.05, 0.05, 0.05),
+    main = "Overlap of Rabies Cases",
+    main.cex = 2,
+    main.fontface = "bold",
+    lwd = 1.2
 )
 
 grid.draw(venn.plot)
+dev.off()
 
-
-# rescaling
+# rescaling risk components
 
 d <- rescale_and_average(d, hazard_names, "hazard")
 d <- rescale_and_average(d, vulnerability_names, "vulnerability")
 d <- rescale_and_average(d, exposure_names, "exposure")
-d <- rescale_and_average(d, historical_hazard_names, "historical_hazard")
 
 # maps
-
-# add  rabies -  #geom_sf(aes(color = RABIES_CASES_HUMAN_INFECTION), color = 'snow3', fill = NA, size = 0.3)
-
-d_rabies <- d %>%
-    filter(!is.na(RABIES_CASES_HUMAN_INFECTION) & RABIES_CASES_HUMAN_INFECTION > 0)
 
 #map_hazard
 
 map_hazard <- ggplot(d) +
     geom_sf(aes(fill = hazard_average), color = NA) + 
     scale_fill_gradient(name = "Hazard", high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
-    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    geom_sf(data = d, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
     scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     ggtitle("Rescaled Hazard Average") +
     theme_minimal()
@@ -189,7 +213,7 @@ map_hazard <- ggplot(d) +
 map_vulnerability <- ggplot(d) +
     geom_sf(aes(fill = vulnerability_average),  color = NA ) + #'gray20', size = 0.02
     scale_fill_distiller(name = "Vulnerability", palette = "Spectral") +
-    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    geom_sf(data = d, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
     scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     #scale_fill_gradient(high = "#e34a33", low = "#fee8c8", guide = "colorbar") +
     ggtitle("Rescaled Vulnerability Average") +
@@ -199,7 +223,7 @@ map_vulnerability <- ggplot(d) +
 map_exposure <- ggplot(d) +
     geom_sf(aes(fill = exposure_average), color = NA ) +
     scale_fill_viridis_c(name = "Exposure", option = "viridis") +
-    geom_sf(data = d_rabies, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
+    geom_sf(data = d, aes(color = RABIES_CASES_HUMAN_INFECTION), fill = NA, size = 0.4) +
     scale_color_gradient(name = "Rabies Cases", low = "black", high = "firebrick2") +
     ggtitle("Rescaled Exposure Average") +
     theme_minimal()
@@ -225,8 +249,6 @@ dev.off()
 # Spatial prioritization ---------------------------------------------------
 
 colnames(d)
-
-
 
 d_flagged <- d %>%
     mutate(
@@ -255,7 +277,90 @@ head(d_flagged[, c("RABIES_CASES_HUMAN_INFECTION", "RABIES_CASES_DOMESTIC_FELINE
 table(d_flagged$historical_flag)
 
 
-nb <- poly2nb(d)
+# historic hazard
+
+label_coords <- d %>%
+    st_centroid() %>%   # centroids for labeling
+    mutate(X = st_coordinates(.)[,1],
+           Y = st_coordinates(.)[,2]) %>%
+    select(NM_MUN,
+           RABIES_CASES_HUMAN_INFECTION,
+           RABIES_CASES_DOMESTIC_FELINE,
+           RABIES_CASES_DOMESTIC_CANINE,
+           X, Y) %>%
+    pivot_longer(
+        cols = c(RABIES_CASES_HUMAN_INFECTION,
+                 RABIES_CASES_DOMESTIC_FELINE,
+                 RABIES_CASES_DOMESTIC_CANINE),
+        names_to = "host",
+        values_to = "cases"
+    ) %>%
+    filter(!is.na(cases)) %>%
+    mutate(
+        host = recode(host,
+                      "RABIES_CASES_HUMAN_INFECTION" = "Human",
+                      "RABIES_CASES_DOMESTIC_FELINE" = "Feline",
+                      "RABIES_CASES_DOMESTIC_CANINE" = "Canine")
+    ) %>%
+    group_by(host) %>%
+    slice_max(order_by = cases, n = 5) %>%  # top 10
+    ungroup()
+
+# melt
+d_long <- d %>%
+    pivot_longer(
+        cols = c(RABIES_CASES_HUMAN_INFECTION,
+                 RABIES_CASES_DOMESTIC_FELINE,
+                 RABIES_CASES_DOMESTIC_CANINE),
+        names_to = "host",
+        values_to = "cases"
+    ) %>%
+    mutate(
+        host = recode(host,
+                      "RABIES_CASES_HUMAN_INFECTION" = "Human",
+                      "RABIES_CASES_DOMESTIC_FELINE" = "Feline",
+                      "RABIES_CASES_DOMESTIC_CANINE" = "Canine")
+    )
+
+
+fig_facets <- ggplot(d_long) +
+    geom_sf(aes(fill = cases), color = NA) +
+    geom_sf(data = reg, fill = NA, colour = "black", linewidth = 0.8) +
+    ggrepel::geom_text_repel(
+        data = label_coords,
+        aes(x = X, y = Y, label = paste0(NM_MUN, "\n(", cases, ")")),
+        size = 3,
+        box.padding = 0.5,
+        point.padding = 0.3,
+        segment.color = "gray"
+    ) +
+    scale_fill_gradient(
+        low = "purple1",
+        high = "darkgreen",
+        na.value = "white",
+        name = "Rabies cases"    ) +
+    facet_wrap(~host, ncol = 1) +
+    labs(
+        title = "",
+        fill = "Rabies cases",    x = "Longitude",           y = "Latitude"   ) +
+    theme_minimal() +
+    theme(
+        strip.text = element_text(face = "bold", size = 12),
+        plot.title = element_text(face = "bold", hjust = 0.5)
+    )
+
+fig_facets
+
+setwd(here())
+setwd('99_manuscript')
+jpeg(filename = "rabies_historic_top10.jpg", width = 22, height = 32, units = "cm", res = 400)
+fig_facets
+dev.off()
+
+# Neighborhood
+
+
+nb <- poly2nb(d) #slow
 
 no_neighbors <- which(card(nb) == 0) 
 d[no_neighbors, 'RABIES_CASES_DOMESTIC_FELINE'] 
@@ -266,21 +371,95 @@ d[no_neighbors,]
 
 listw <- nb2listw(nb, style = "B", zero.policy = TRUE)  # binary weights, ignore islands
 
+
+
 d$historical_flag <- d_flagged$historical_flag
 
 d$neighbor_risk <- lag.listw(listw, d$historical_flag)
 
 table(d$historical_flag)
+
 table(d$neighbor_risk)
+
+# Composite index
 
 d <- d %>% mutate(  Spatial_prioritization_index = (exposure_average + hazard_average + vulnerability_average) / 3 + 
                  0.5 * historical_flag + 0.5 * neighbor_risk    )
 
+d <- d %>% mutate(  Spatial_prioritization_index = (exposure_average + hazard_average + vulnerability_average) / 3 + 
+                        0.5 * historical_flag + 0.5 * neighbor_risk )
+
+preds <- (d$exposure_average + d$hazard_average + d$vulnerability_average) / 3
+
+# Explo
+
+plot(preds, d$historical_flag)
+cor(d$exposure_average, d$historical_flag)
+cor(d$hazard_average, d$historical_flag) #negative???
+cor(d$vulnerability_average, d$historical_flag)
+
+summary(d$CANINE_VACCINATED)
+
+cor(d$CANINE_VACCINATED, d$sdm_cont_mn)
+
+plot_ly(
+    data = d,
+    x = ~sdm_cont_mn,
+    y = ~CATTLE_POP,
+    z = ~CANINE_VACCINATED,
+    color = ~historical_flag, #+ RABIES_CASES_DOMESTIC_CANINE + RABIES_CASES_DOMESTIC_FELINE,
+    colors = viridis(100),
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 4, opacity = 0.6)
+)
+
+
+
+library(plotly)
+library(dplyr)
+library(viridis)
+
+plot_ly(
+    data = d,
+    x = ~exposure_average,
+    y = ~hazard_average,
+    z = ~vulnerability_average,
+    color = ~historical_flag, #+ RABIES_CASES_DOMESTIC_CANINE + RABIES_CASES_DOMESTIC_FELINE,
+    colors = viridis(100),
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 4, opacity = 0.6)
+)
+
+
+s check spatial correlation
+# Because spatial correlation occurs - historical rabies cases tend to cluster spatially
+
+moran.test(d$historical_flag, listw)
+
+#Moran I test under randomisation
+#Moran I statistic standard deviate = 10.241, p-value < 2.2e-16
+#alternative hypothesis: greater
+#sample estimates:
+#    Moran I statistic       Expectation          Variance 
+#8.074974e-02     -1.795977e-04      6.245003e-05 
+
+moran.test(d$Spatial_prioritization_index, listw)
+
 hist(d$Spatial_prioritization_index)
 
+summary(d$Spatial_prioritization_index)
 
+library(pROC)
+d$historical_flag
+roc_obj <- roc(d$historical_flag, d$Spatial_prioritization_index)
+
+auc(roc_obj)
+plot(roc_obj)
+
+# 
 d$scale_index <- scales::rescale(d$Spatial_prioritization_index)
-summary(d$scale_index)
 
 
 quantile(d$scale_index)[1]
@@ -307,12 +486,6 @@ table(muni_sel$index_cat)
 
 sum(d$scale_index > 0.04151593, na.rm = TRUE)
 
-
-reg <- geobr::read_region(year = 2020) %>% 
-    sf::st_crop(xmin = -74, ymin = -34, xmax = -35, ymax = 5)
-reg
-
-
 very_high_munis <- muni_sel %>%
     filter(index_cat == "Very high" & historical_flag == 1) %>%
     pull(name_muni)
@@ -320,7 +493,7 @@ very_high_munis <- muni_sel %>%
 
 length(very_high_munis)
 
-# Sel
+# Selectiion
 
 muni_cidades <- muni_sel %>% 
     dplyr::filter(name_muni %in% very_high_munis)
@@ -340,8 +513,6 @@ map_prio <- ggplot() +
     geom_sf(data = muni_sel, aes(fill = index_cat), colour = "white", linewidth = 0.01, alpha = 0.7) +
     # Region outline
     geom_sf(data = reg, fill = NA, colour = "black", linewidth = 0.8) +
-    # City points
-    #geom_sf(data = muni_sel, fill = "white", shape = 21, size = 2, colour = "gray40") +
     geom_text_repel(
         data = st_centroid(muni_cidades_coords) %>%
             cbind(st_coordinates(.)),
@@ -400,7 +571,6 @@ very_high_munis <- muni_sel %>%
     pull(name_muni)
 
 length(very_high_munis)
-
 
 muni_cidades <- muni_sel %>% 
     dplyr::filter(name_muni %in% very_high_munis)
@@ -486,35 +656,4 @@ ggarrange(
 )
 dev.off()
 
-
-# historic risk - old eval - Human only 
-top5_labels <- d %>%
-    filter(!is.na(RABIES_CASES_HUMAN_INFECTION)) %>%
-    top_n(5, RABIES_CASES_HUMAN_INFECTION)
-
-top5_labels_coords <- st_centroid(top5_labels) %>%
-    cbind(st_coordinates(.))  # adds X and Y columns
-
-map_historic_risk <- ggplot(d) +  geom_sf(aes(fill = RABIES_CASES_HUMAN_INFECTION), color = NA ) +
-    ggrepel::geom_text_repel(
-        data = top5_labels_coords,
-        aes(x = X, y = Y, label = paste0(NM_MUN, "\n(", RABIES_CASES_HUMAN_INFECTION, ")")),
-        size = 3,
-        color = "black",
-        box.padding = 0.5,
-        point.padding = 0.3,
-        segment.color = "gray"
-    ) +
-    scale_fill_viridis_c(
-        name = "Human rabies cases",
-        option = "magma",
-        na.value = "white"
-    ) +     labs(      title = "Rabies Historical Risk",
-        fill = "Human rabies cases" ) +
-    ggtitle("Rabies Historic Risk") +
-    theme_minimal()
-
-jpeg(filename = "rabies_historic_risk.jpg", width = 22, height = 22, units = "cm", res = 400)
-map_historic_risk
-dev.off()
 #------------------------------------------------------------------------------------------
