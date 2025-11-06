@@ -22,6 +22,9 @@ library(VennDiagram)
 library(pROC)
 library(nngeo)
 library(grid)
+library(openxlsx)
+library(dplyr)
+
 
 d <- st_read('C:/Users/rdel0062/Downloads/00_mun_data.gpkg')
 
@@ -446,8 +449,6 @@ cor(d$CANINE_VACCINATED, d$sdm_cont_mn)
  #   marker = list(size = 4, opacity = 0.6)
 #)
 
-
-s check spatial correlation
 # Because spatial correlation occurs - historical rabies cases tend to cluster spatially
 
 moran.test(d$historical_flag, listw)
@@ -526,14 +527,8 @@ quantile(muni_sel$scale_index)
 
 table(muni_sel$index_cat)
 
-
-
-
 # Export table
-library(openxlsx)
-library(dplyr)
-
-# Arrange and select columns
+# Prioriti index for all municipalities of Brazil
 table(muni_sel$index_cat)
 out_table <- muni_sel %>%
     arrange(factor(index_cat, levels = c("Very high", "High", "Average", "Low", "Very low"))) %>%
@@ -543,9 +538,9 @@ out_table <- muni_sel %>%
            Priority = index_cat) %>%
     st_set_geometry(NULL)
 
-nrow(out_table)
+#write.xlsx(out_table, "Table_S1_Rabies_Prioritization_Brazil_5571.xlsx", overwrite = TRUE)
 
-write.xlsx(out_table, "Table_1_Rabies_Prioritization_Brazil_5571.xlsx", overwrite = TRUE)
+# Table 1 - high risk
 
 out_table_high <-  muni_sel %>%
     filter(index_cat %in% c("Very high", "High")) %>%
