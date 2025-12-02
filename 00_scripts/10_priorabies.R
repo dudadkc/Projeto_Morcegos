@@ -1,8 +1,12 @@
 #' ----
 #' aim: spatial prioritization rabies prevention
 #' author: re
-#' date: Nov 2025
+#' date: Dec 2025
 #' ----
+
+################################################################################
+# DISCLAIMER - plots and spatial processing can be SLOW!------------------------
+################################################################################
 
 library(tidyverse)
 library(plotly)
@@ -60,8 +64,34 @@ rescale_and_average <- function(data, var_names, prefix) {
     return(data)
 }
 
-# Arranging the scale for positive expectations
 
+# Municipalities check
+table(table(unique(d$code_muni)))
+
+city_counts <- d %>%
+    group_by(name_muni, CD_UF) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    arrange(desc(count))
+
+city_counts
+
+repeated_polygons <- city_counts %>%
+    filter(count > 1)
+
+repeated_polygons
+
+# Corumba data curation
+
+d[d$name_muni == "Corumbá", 'RABIES_CASES_DOMESTIC_CANINE']
+d[d$name_muni == "Corumbá", 'RABIES_CASES_DOMESTIC_FELINE']
+d[d$name_muni == "Corumbá", 'RABIES_CASES_HUMAN_INFECTION']
+
+d <- d %>% 
+    filter(!(name_muni == "Corumbá" & RABIES_CASES_DOMESTIC_CANINE == 1))
+
+d[d$name_muni == "Corumbá", 'RABIES_CASES_DOMESTIC_CANINE']
+
+nrow(d) #perfect
 
 # For Imbe city ---------- no information for sdm so we will fill in with its closest neighbor (Novo Barreiro, suitabilty = 0.7)
 
@@ -88,6 +118,7 @@ summary(d$CANINE_VACCINATED)
 
 summary(d$CANINE_VACCINATED)
 cor(d$CANINE_VACCINATED, d$sdm_cont_mn)
+# Arranging the scale for positive expectations
 
 d$RT_LITE <- d$RT_LITE*(-1)
 
@@ -96,6 +127,8 @@ plot(d$SPENDING_EPIDEMIO_SURV ~  d$PTota)
 plot(d$SPENDING_HEALTH~  d$PTota)
 
 d$HAB_KM2
+
+# Supplemental figures
 
 ggplot(d, aes(x = HAB_KM2, y = SPENDING_HEALTH, 
               size = RABIES_CASES_HUMAN_INFECTION, 
@@ -176,15 +209,18 @@ human_cases <- d$RABIES_CASES_HUMAN_INFECTION > 0
 feline_cases <- d$RABIES_CASES_DOMESTIC_FELINE > 0
 canine_cases <- d$RABIES_CASES_DOMESTIC_CANINE > 0
 
+# Supplemental figure - Venn
 
-png(filename = "venn_rabies_cases.png",
-    width = 2000,   # pixels
+
+setwd(here())
+setwd('99_manuscript')
+
+png(filename = "Supplemental_figure_venn_rabies_cases.jpg",
+    width = 2000,   
     height = 2000,
-    res = 300       )
-
+    res = 300)
 
 venn_counts <- list( Human = which(human_cases), Feline = which(feline_cases), Canine = which(canine_cases) )
-
 
 venn.plot <- venn.diagram(
     x = venn_counts,
@@ -207,13 +243,11 @@ grid.draw(venn.plot)
 dev.off()
 
 # rescaling risk components
-
 d <- rescale_and_average(d, hazard_names, "hazard")
 d <- rescale_and_average(d, vulnerability_names, "vulnerability")
 d <- rescale_and_average(d, exposure_names, "exposure")
 
 # maps
-
 #map_hazard
 
 map_hazard <- ggplot(d) +
@@ -247,25 +281,11 @@ map_exposure <- ggplot(d) +
 
 
 
-# all
+# all components
 library(ggpubr)
 setwd(here())
 setwd('99_manuscript')
-# width = 22, height = 30
-jpeg(filename = "rabies_risk_components_wide.jpg", width = 33, height = 23, units = "cm", res = 400)
-ggarrange(
-    map_hazard,
-    map_vulnerability,
-    map_exposure,
-    ncol = 3,
-    nrow = 1,
-    align = "v"
-)
-dev.off()
-
-
-
-jpeg(filename = "rabies_risk_components_long.jpg", width = 23, height = 30, units = "cm", res = 400)
+jpeg(filename = "Supplemental_rabies_risk_components.jpg", width = 14, height = 30, units = "cm", res = 400)
 ggarrange(
     map_hazard,
     map_vulnerability,
@@ -276,10 +296,7 @@ ggarrange(
 )
 dev.off()
 
-
 # Spatial prioritization ---------------------------------------------------
-
-colnames(d)
 
 d_flagged <- d %>%
     mutate(
@@ -307,7 +324,6 @@ head(d_flagged[, c("RABIES_CASES_HUMAN_INFECTION", "RABIES_CASES_DOMESTIC_FELINE
                    "RABIES_CASES_DOMESTIC_CANINE", "historical_flag")])
 table(d_flagged$historical_flag)
 
-
 # historic hazard
 
 label_coords <- d %>%
@@ -329,9 +345,9 @@ label_coords <- d %>%
     filter(!is.na(cases)) %>%
     mutate(
         host = recode(host,
-                      "RABIES_CASES_HUMAN_INFECTION" = "Human",
-                      "RABIES_CASES_DOMESTIC_FELINE" = "Feline",
-                      "RABIES_CASES_DOMESTIC_CANINE" = "Canine")
+                      "RABIES_CASES_HUMAN_INFECTION" = "C. Human",
+                      "RABIES_CASES_DOMESTIC_FELINE" = "B. Feline",
+                      "RABIES_CASES_DOMESTIC_CANINE" = "A. Canine")
     ) %>%
     group_by(host) %>%
     slice_max(order_by = cases, n = 5) %>%  # top 10
@@ -348,30 +364,30 @@ d_long <- d %>%
     ) %>%
     mutate(
         host = recode(host,
-                      "RABIES_CASES_HUMAN_INFECTION" = "Human",
-                      "RABIES_CASES_DOMESTIC_FELINE" = "Feline",
-                      "RABIES_CASES_DOMESTIC_CANINE" = "Canine")
+                      "RABIES_CASES_HUMAN_INFECTION" = "C. Human",
+                      "RABIES_CASES_DOMESTIC_FELINE" = "B. Feline",
+                      "RABIES_CASES_DOMESTIC_CANINE" = "A. Canine")
     )
 
 
-# Fig rabies in dogs, cats, and humans
+# Main text Fig 3 - rabies in dogs, cats, and humans
 
-fig_facets1 <- ggplot(d_long) +
+fig3 <-  ggplot(d_long) +
     geom_sf(aes(fill = cases), colour = "gray80", linewidth = 0.01, alpha = 0.7) +
     geom_sf(data = reg, fill = NA, colour = "black", linewidth = 0.8) +
     ggrepel::geom_text_repel(      data = label_coords,
-        aes(x = X, y = Y, label = paste0(NM_MUN, "\n(", cases, ")")),
-        size = 3,
-        box.padding = 0.5,
-        point.padding = 0.3,
-        segment.color = "gray"
+                                   aes(x = X, y = Y, label = paste0(NM_MUN, "\n(", cases, ")")),
+                                   size = 3,
+                                   box.padding = 0.5,
+                                   point.padding = 0.3,
+                                   segment.color = "gray"
     ) +
     scale_fill_gradient(
         low = "darkgreen",
         high = "purple1",
         na.value = "white",
         name = "Rabies cases"    ) +
-    facet_wrap(~host, ncol = 1) +
+    facet_wrap(~host, ncol = 3) +
     labs(
         title = "",
         fill = "Rabies cases",    x = "Longitude",           y = "Latitude"   ) +
@@ -379,16 +395,23 @@ fig_facets1 <- ggplot(d_long) +
     annotation_scale(pad_x = unit(1.5, "cm"), pad_y = unit(1, "cm"), bar_cols = c("grey80", "white"), text_cex = 0.8) +
     theme_minimal(base_family = "sans") +
     theme( legend.position = "bottom",        strip.text = element_text(face = "bold", size = 12),
-        plot.title = element_text(face = "bold", hjust = 0.5)
+           plot.title = element_text(face = "bold", hjust = 0.5)
     )
 
-fig_facets1
+    
+fig3
 
+# export
 setwd(here())
 setwd('99_manuscript')
-jpeg(filename = "rabies_historic_top_long.jpg", width =22, height = 32, units = "cm", res = 400)
-fig_facets1
+jpeg(filename = "Figure_03.jpg", width =32, height = 22, units = "cm", res = 400)
+fig3
 dev.off()
+# tif for journal
+jpeg(filename = "Figure_03.tif", width =32, height = 22, units = "cm", res = 400)
+fig3
+dev.off()
+
 
 # Neighborhood -----------------------------------------------------------------
 
@@ -412,15 +435,16 @@ table(d$historical_flag)
 
 table(d$neighbor_risk)
 
-# Composite index
+# Composite index - Main text presented as 0.5
 
 d <- d %>% mutate(  Spatial_prioritization_index = (exposure_average + hazard_average + vulnerability_average) / 3 + 
                  0.5 * historical_flag + 0.5 * neighbor_risk    )
 
+# Weight = 1
 d <- d %>% mutate(  Spatial_prioritization_index_1 = (exposure_average + hazard_average + vulnerability_average) / 3 + 
                        1 * historical_flag + 1 * neighbor_risk    )
 
-
+# correlation values
 preds <- (d$exposure_average + d$hazard_average + d$vulnerability_average) / 3
 
 # Explo
@@ -484,19 +508,19 @@ min(d$Spatial_prioritization_index)
 mean(d$Spatial_prioritization_index) + sd(d$Spatial_prioritization_index)
 max(d$Spatial_prioritization_index)
 
-d$scale_index <- scales::rescale(d$Spatial_prioritization_index)
-
 # n = n()
-
 
 library(classInt)
 jenks_breaks <- classIntervals(d$Spatial_prioritization_index, n = 5, style = "jenks")$brks
+jenks_breaks
+
+jenks_breaks1 <- classIntervals(d$Spatial_prioritization_index_1, n = 5, style = "jenks")$brks
+jenks_breaks1
+
 #Jenks Natural Breaks
 #groups similar values together while maximising the differences between groups
 
-jenks_breaks
-
-
+# very high
 d %>%
     filter(Spatial_prioritization_index > jenks_breaks[5]) %>%
     select(name_muni, Spatial_prioritization_index)
@@ -505,9 +529,11 @@ d %>%
     filter(Spatial_prioritization_index > jenks_breaks[5]) %>%
     select(name_muni, historical_flag, name_state)
 
+# high
 d_high_priority <- d %>%
     filter(Spatial_prioritization_index > jenks_breaks[4]) %>%
     select(name_muni, historical_flag, name_state)
+
 
 
 muni_sel <- d %>%
@@ -523,13 +549,12 @@ muni_sel <- d %>%
         index_cat = fct_relevel(index_cat, c("Very low", "Low", "Average", "High", "Very high"))
     )
 
-quantile(muni_sel$scale_index)
-
 table(muni_sel$index_cat)
 
-# Export table
-# Prioriti index for all municipalities of Brazil
+# Export table------------------------------------------------------------------
+# Prioritization index for all municipalities of Brazil
 table(muni_sel$index_cat)
+
 out_table <- muni_sel %>%
     arrange(factor(index_cat, levels = c("Very high", "High", "Average", "Low", "Very low"))) %>%
     select(Municipality = name_muni,
@@ -538,7 +563,8 @@ out_table <- muni_sel %>%
            Priority = index_cat) %>%
     st_set_geometry(NULL)
 
-#write.xlsx(out_table, "Table_S1_Rabies_Prioritization_Brazil_5571.xlsx", overwrite = TRUE)
+#write.xlsx(out_table, "Table_S2.xlsx", overwrite = FALSE)
+
 
 # Table 1 - high risk
 
@@ -554,24 +580,39 @@ out_table_high <-  muni_sel %>%
 nrow(out_table_high)
 
 # Export to Excel
-#write.xlsx(out_table_high, "Table_1.xlsx", overwrite = TRUE)
+#write.xlsx(out_table_high, "Table_1.xlsx", overwrite = FALSE)
 
-# Selectiion
+# Selection
 
-very_high_munis <- muni_sel %>%
-    filter(index_cat == "Very high"| index_cat == "High" ) %>% #& historical_flag == 0
+
+tref <- read.xlsx('Table_S2.xlsx')
+
+tref_high <-  tref %>%   filter(Priority == "Very high"| Priority == "High")
+    
+
+tref_high$Municipality
+
+
+# High and very high -making sure we get the right matches (several cities have same names in different states)
+
+very_high_munis <- d %>%
+    semi_join(tref_high, 
+              by = c("name_muni" = "Municipality", 
+                     "name_state" = "State")) %>% #& historical_flag == 0
     pull(name_muni)
+
+
+table(table(very_high_munis))
 
 very_high_munis
 
-
-length(very_high_munis)
-
-
-muni_cidades <- muni_sel %>% 
-    dplyr::filter(name_muni %in% very_high_munis)
+muni_cidades <- d %>%
+    semi_join(tref_high, 
+              by = c("name_muni" = "Municipality", 
+                     "name_state" = "State"))
 
 muni_cidades
+
 
 muni_cidades_coords <- muni_cidades %>%
         mutate(centroid = st_centroid(.)) %>%
@@ -580,45 +621,52 @@ muni_cidades_coords <- muni_cidades %>%
         Y = st_coordinates(centroid)[,2]
     )
 
+muni_cidades_coords
+
+muni_cidades_coords <- muni_cidades_coords %>%
+    mutate(label_col = ifelse(historical_flag == 0, "black", "firebrick3"))
+# Map
+
 map_prio <- ggplot() +   
     geom_sf(data = muni_sel, aes(fill = index_cat), colour = "white", linewidth = 0.01, alpha = 0.7) +
-    # Region outline
     geom_sf(data = reg, fill = NA, colour = "black", linewidth = 0.9) +
-    geom_text_repel(  data = st_centroid(muni_cidades_coords) %>%
-            cbind(st_coordinates(.)),
-        aes(x = X, y = Y, label = name_muni),
-        colour = "white",
-        bg.color = "black",
-        bg.r = 0.2,
+    geom_text_repel(
+        data = st_centroid(muni_cidades_coords) %>% cbind(st_coordinates(.)),
+        aes(x = X, y = Y, label = name_muni, colour = label_col),
+        bg.color = "white",   # or keep black, depends on contrast
+        bg.r = 0.3,
         box.padding = 0.3,
         segment.colour = "grey60",
         size = 3, 
-        force = 2 ,
-        max.overlaps = 100) +
+        force = 2,
+        max.overlaps = 100
+    ) +
     scale_fill_brewer(palette = "RdYlGn", direction = -1, name = "Index") +
+    scale_colour_identity() +  # ensures the colours are used as-is
     labs(title = "", fill = "Spatial\nPrioritization Index") +
     annotation_north_arrow(pad_x = unit(1.2, "cm"), pad_y = unit(1.5, "cm"), which_north = "true", style = north_arrow_fancy_orienteering) +
     annotation_scale(pad_x = unit(1.5, "cm"), pad_y = unit(1, "cm"), bar_cols = c("grey80", "white"), text_cex = 0.8) +
     theme_minimal(base_family = "sans") +
-    theme(panel.grid.major = element_blank(),
-          axis.text = element_blank(),
-          axis.ticks = element_blank(),
-          axis.title = element_blank(),
-          legend.position = c(.15, .3),
-          legend.background = element_blank(),
-          legend.title = element_text(size = 15),
-          legend.text = element_text(size = 10),
-          plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
-          plot.caption = element_text(size = 9, hjust = 0, colour = "grey30"),
-          plot.background = element_rect(fill = "white", colour = NA) )
-
+    theme(
+        panel.grid.major = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = c(.15, .3),
+        legend.background = element_blank(),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size = 10),
+        plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+        plot.caption = element_text(size = 9, hjust = 0, colour = "grey30"),
+        plot.background = element_rect(fill = "white", colour = NA)
+    )
 
 map_prio
 
 # Export
 setwd(here())
 setwd('99_manuscript')
-ggsave( filename = "Figure_5.jpg",
+ggsave( filename = "Figure_04.jpg",
         plot = map_prio,
         width = 10,
         height = 8,
@@ -626,4 +674,12 @@ ggsave( filename = "Figure_5.jpg",
         dpi = 300,
         bg = "white" )
 
+
+ggsave( filename = "Figure_04.tif",
+        plot = map_prio,
+        width = 10,
+        height = 8,
+        units = "in",
+        dpi = 300,
+        bg = "white" )
 #------------------------------------------------------------------------------------------
